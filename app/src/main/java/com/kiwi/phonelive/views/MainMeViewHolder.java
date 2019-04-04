@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -91,7 +92,6 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mLifeCycleListener = new LifeCycleAdapter() {
-
             @Override
             public void onResume() {
                 if (mPaused && mShowed) {
@@ -130,6 +130,7 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
             AppConfig appConfig = AppConfig.getInstance();
             UserBean u = appConfig.getUserBean();
             List<UserItemBean> list = appConfig.getUserItemList();
+            Log.e("aa","-----------测试===111=="+list.size());
             if (u != null && list != null) {
                 showData(u, list);
             }
@@ -165,6 +166,7 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
         mLive.setText(StringUtil.toWan(u.getLives()));
         mFollow.setText(StringUtil.toWan(u.getFollows()));
         mFans.setText(StringUtil.toWan(u.getFans()));
+        Log.e("aa","--------------list==-"+list.size());
         if (list != null && list.size() > 0) {
             if (mAdapter == null) {
                 mAdapter = new MainMeAdapter(mContext, list);

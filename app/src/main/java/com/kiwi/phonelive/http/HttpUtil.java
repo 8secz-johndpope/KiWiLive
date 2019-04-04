@@ -1,6 +1,7 @@
 package com.kiwi.phonelive.http;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -183,6 +184,7 @@ public class HttpUtil {
                         if (code == 0 && info.length > 0) {
                             JSONObject obj = JSON.parseObject(info[0]);
                             UserBean bean = JSON.toJavaObject(obj, UserBean.class);
+                            Log.e("aa","-----------获取列表--"+info[0]);
                             AppConfig.getInstance().setUserBean(bean);
                             AppConfig.getInstance().setUserItemList(obj.getString("list"));
                             SpUtil.getInstance().setStringValue(SpUtil.USER_INFO, info[0]);

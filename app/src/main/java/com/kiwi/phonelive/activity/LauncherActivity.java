@@ -53,7 +53,7 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         mContext = this;
         ImageView imageView = findViewById(R.id.img);
-        ImgLoader.display(R.mipmap.screen, imageView);
+        ImgLoader.display(R.mipmap.screen1, imageView);
         mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             @Override

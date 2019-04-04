@@ -653,7 +653,7 @@ public class VerticalViewPager extends ViewGroup {
     }
 
     // We want the duration of the page snap animation to be influenced by the distance that
-    // the screen has to travel, however, we don't want this duration to be effected in a
+    // the screen1 has to travel, however, we don't want this duration to be effected in a
     // purely linear fashion. Instead, we use this method to moderate the effect that the distance
     // of travel has on the overall snap duration.
     float distanceInfluenceForSnapDuration(float f) {
@@ -1564,7 +1564,7 @@ public class VerticalViewPager extends ViewGroup {
      * @param offsetPixels Value in pixels indicating the offset from position.
      */
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
-        // Offset any decor views if needed - keep them on-screen at all times.
+        // Offset any decor views if needed - keep them on-screen1 at all times.
         if (mDecorChildCount > 0) {
             final int scrollY = getScrollY();
             int paddingTop = getPaddingTop();
@@ -1821,7 +1821,7 @@ public class VerticalViewPager extends ViewGroup {
         if (mFakeDragging) {
             // A fake drag is in progress already, ignore this real one
             // but still eat the touch events.
-            // (It is likely that the user is multi-touching the screen.)
+            // (It is likely that the user is multi-touching the screen1.)
             return true;
         }
 

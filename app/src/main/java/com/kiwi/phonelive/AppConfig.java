@@ -359,9 +359,9 @@ public class AppConfig {
      * 个人中心功能列表
      */
     public List<UserItemBean> getUserItemList() {
+        Log.e("aa","---------测试==mUserItemList="+mUserItemList.size());
         if (mUserItemList == null || mUserItemList.size() == 0) {
             String userBeanJson = SpUtil.getInstance().getStringValue(SpUtil.USER_INFO);
-            Log.e("aa","-----------测试-"+userBeanJson);
             if (!TextUtils.isEmpty(userBeanJson)) {
                 JSONObject obj = JSON.parseObject(userBeanJson);
                 if (obj != null) {
