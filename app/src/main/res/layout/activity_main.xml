@@ -56,7 +56,7 @@
                 app:tbn_selected_icon="@mipmap/icon_main_list_1"
                 app:tbn_text_color="#333"
                 app:tbn_text_size="11sp"
-                app:tbn_tip="@string/main_list"
+                app:tbn_tip="@string/community"
                 app:tbn_unselected_icon="@mipmap/icon_main_list_0" />
 
             <com.kiwi.phonelive.custom.TabButton

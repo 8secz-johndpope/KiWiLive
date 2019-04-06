@@ -28,7 +28,6 @@ import java.util.List;
  * Created by cxf on 2018/9/22.
  * 排行
  */
-
 public class MainListViewHolder extends AbsMainViewHolder implements View.OnClickListener {
 
     private AbsMainListViewHolder[] mViewHolders;

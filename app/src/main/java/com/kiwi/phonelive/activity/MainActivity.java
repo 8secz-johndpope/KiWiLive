@@ -43,6 +43,7 @@ import com.kiwi.phonelive.utils.VideoStorge;
 import com.kiwi.phonelive.utils.WordUtil;
 import com.kiwi.phonelive.views.AbsMainViewHolder;
 import com.kiwi.phonelive.views.BonusViewHolder;
+import com.kiwi.phonelive.views.MainCommunityViewHolder;
 import com.kiwi.phonelive.views.MainHomeViewHolder;
 import com.kiwi.phonelive.views.MainListViewHolder;
 import com.kiwi.phonelive.views.MainMeViewHolder;
@@ -89,7 +90,8 @@ public class MainActivity extends AbsActivity {
         mViewHolders[0] = new MainHomeViewHolder(mContext, mViewPager);
 //        mViewHolders[1] = new MainNearViewHolder(mContext, mViewPager);//附近
         mViewHolders[1] = new MainVideoViewHolder(mContext, mViewPager);//视频
-        mViewHolders[2] = new MainListViewHolder(mContext, mViewPager);
+//        mViewHolders[2] = new MainListViewHolder(mContext, mViewPager);//排行
+        mViewHolders[2]=new MainCommunityViewHolder(mContext,mViewPager);//社区
         mViewHolders[3] = new MainMeViewHolder(mContext, mViewPager);
         List<View> list = new ArrayList<>();
         MainAppBarLayoutListener appBarLayoutListener = new MainAppBarLayoutListener() {

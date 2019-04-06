@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/img"
-        android:textColor="@color/textColor"
+        android:textColor="@color/fense"
         android:textSize="17sp"
         />
 
@@ -34,7 +34,7 @@
         android:layout_centerVertical="true"
         android:background="@drawable/bg_coin_money"
         android:gravity="center"
-        android:textColor="@color/global"
+        android:textColor="@color/fense"
         android:textSize="14sp"
         />
 
