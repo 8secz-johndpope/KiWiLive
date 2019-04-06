@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * 社区
  */
-
 public class MainCommunityViewHolder extends AbsMainParentViewHolder {
 
     public MainCommunityViewHolder(Context context, ViewGroup parentView) {

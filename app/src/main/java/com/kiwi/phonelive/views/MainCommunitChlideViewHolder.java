@@ -2,6 +2,7 @@ package com.kiwi.phonelive.views;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
@@ -44,75 +45,72 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
 
     @Override
     protected int getLayoutId() {
-        return R.layout.view_main_home_video;
+        return R.layout.view_communitchlide;
     }
 
     @Override
     public void init() {
         super.init();
         mRefreshView = (RefreshView) findViewById(R.id.refreshView);
-        mRefreshView.setNoDataLayoutId(R.layout.view_no_data_live_video);
-//        mRefreshView.setLayoutManager(new GridLayoutManager(mContext, 2, GridLayoutManager.VERTICAL, false));
-//        ItemDecoration decoration = new ItemDecoration(mContext, 0x00000000, 5, 0);
-//        decoration.setOnlySetItemOffsetsButNoDraw(true);
-//        mRefreshView.setItemDecoration(decoration);
-//        mRefreshView.setDataHelper(new RefreshView.DataHelper<VideoBean>() {
-//            @Override
-//            public RefreshAdapter<VideoBean> getAdapter() {
-//                if (mAdapter == null) {
-//                    mAdapter = new MainHomeVideoAdapter(mContext);
-//                    mAdapter.setOnItemClickListener(MainCommunitChlideViewHolder.this);
-//                }
-//                return mAdapter;
-//            }
-//
-//            @Override
-//            public void loadData(int p, HttpCallback callback) {
-//                HttpUtil.getHomeVideoList(p, callback);
-//            }
-//
-//            @Override
-//            public List<VideoBean> processData(String[] info) {
-//                return JSON.parseArray(Arrays.toString(info), VideoBean.class);
-//            }
-//
-//            @Override
-//            public void onRefresh(List<VideoBean> list) {
-//                VideoStorge.getInstance().put(Constants.VIDEO_HOME, list);
-//            }
-//
-//            @Override
-//            public void onNoData(boolean noData) {
-//
-//            }
-//
-//            @Override
-//            public void onLoadDataCompleted(int dataCount) {
-//                if (dataCount < 10) {
-//                    mRefreshView.setLoadMoreEnable(false);
-//                } else {
-//                    mRefreshView.setLoadMoreEnable(true);
-//                }
-//            }
-//        });
-//        mLifeCycleListener = new LifeCycleAdapter() {
-//            @Override
-//            public void onCreate() {
-//                EventBus.getDefault().register(MainCommunitChlideViewHolder.this);
-//            }
-//
-//            @Override
-//            public void onDestroy() {
-//                EventBus.getDefault().unregister(MainCommunitChlideViewHolder.this);
-//            }
-//        };
-//        mVideoScrollDataHelper = new VideoScrollDataHelper() {
-//
-//            @Override
-//            public void loadData(int p, HttpCallback callback) {
-//                HttpUtil.getHomeVideoList(p, callback);
-//            }
-//        };
+        mRefreshView.setNoDataLayoutId(R.layout.view_no_data_live_communitchlide);
+        mRefreshView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRefreshView.setDataHelper(new RefreshView.DataHelper<VideoBean>() {
+            @Override
+            public RefreshAdapter<VideoBean> getAdapter() {
+                if (mAdapter == null) {
+                    mAdapter = new MainHomeVideoAdapter(mContext);
+                    mAdapter.setOnItemClickListener(MainCommunitChlideViewHolder.this);
+                }
+                return mAdapter;
+            }
+
+            @Override
+            public void loadData(int p, HttpCallback callback) {
+                HttpUtil.getHomeVideoList(p, callback);
+            }
+
+            @Override
+            public List<VideoBean> processData(String[] info) {
+                return JSON.parseArray(Arrays.toString(info), VideoBean.class);
+            }
+
+            @Override
+            public void onRefresh(List<VideoBean> list) {
+                VideoStorge.getInstance().put(Constants.VIDEO_HOME, list);
+            }
+
+            @Override
+            public void onNoData(boolean noData) {
+
+            }
+
+            @Override
+            public void onLoadDataCompleted(int dataCount) {
+                if (dataCount < 10) {
+                    mRefreshView.setLoadMoreEnable(false);
+                } else {
+                    mRefreshView.setLoadMoreEnable(true);
+                }
+            }
+        });
+        mLifeCycleListener = new LifeCycleAdapter() {
+            @Override
+            public void onCreate() {
+                EventBus.getDefault().register(MainCommunitChlideViewHolder.this);
+            }
+
+            @Override
+            public void onDestroy() {
+                EventBus.getDefault().unregister(MainCommunitChlideViewHolder.this);
+            }
+        };
+        mVideoScrollDataHelper = new VideoScrollDataHelper() {
+
+            @Override
+            public void loadData(int p, HttpCallback callback) {
+                HttpUtil.getHomeVideoList(p, callback);
+            }
+        };
     }
 
     @Override

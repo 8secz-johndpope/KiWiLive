@@ -119,7 +119,7 @@ public class MainActivity extends AbsActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
+                if (position == 0||position == 1) {
                     btn_start.setVisibility(View.VISIBLE);
                 } else {
                     btn_start.setVisibility(View.GONE);

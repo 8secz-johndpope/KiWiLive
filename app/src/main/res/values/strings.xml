@@ -533,5 +533,6 @@
     <string name="count">数量</string>
     <string name="next">下一步</string>
     <string name="upload">上传</string>
-
+    <string name="no_data_live_communitchlide1">暂无动态</string>
+    <string name="no_data_live_communitchlide2">赶快发布自己的动态吧</string>
 </resources>
