@@ -135,4 +135,6 @@ public class HttpConsts {
     public static final String GAME_EBB_BET = "gameEbbBet";
     public static final String GAME_LUCK_PAN_CREATE = "gameLuckPanCreate";
     public static final String GAME_LUCK_PAN_BET = "gameLuckPanBet";
+    //社区相关
+    public static final String COMMUNITY="getCommunity";
 }

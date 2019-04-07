@@ -3,14 +3,17 @@ package com.kiwi.phonelive.views;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.kiwi.phonelive.Constants;
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.activity.VideoPlayActivity;
+import com.kiwi.phonelive.adapter.MainCommunityAdapter;
 import com.kiwi.phonelive.adapter.MainHomeVideoAdapter;
 import com.kiwi.phonelive.adapter.RefreshAdapter;
+import com.kiwi.phonelive.bean.CommunitChlideBean;
 import com.kiwi.phonelive.bean.VideoBean;
 import com.kiwi.phonelive.custom.ItemDecoration;
 import com.kiwi.phonelive.custom.RefreshView;
@@ -32,13 +35,13 @@ import java.util.List;
 
 /**
  * Created by cxf on 2018/9/22.
- * 首页视频
+ * 社区
  */
 
 public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder implements OnItemClickListener<VideoBean> {
 
-    private MainHomeVideoAdapter mAdapter;
-    private VideoScrollDataHelper mVideoScrollDataHelper;
+    private MainCommunityAdapter mAdapter;
+
     public MainCommunitChlideViewHolder(Context context, ViewGroup parentView) {
         super(context, parentView);
     }
@@ -54,29 +57,28 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
         mRefreshView = (RefreshView) findViewById(R.id.refreshView);
         mRefreshView.setNoDataLayoutId(R.layout.view_no_data_live_communitchlide);
         mRefreshView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRefreshView.setDataHelper(new RefreshView.DataHelper<VideoBean>() {
+        mRefreshView.setDataHelper(new RefreshView.DataHelper<CommunitChlideBean>() {
             @Override
-            public RefreshAdapter<VideoBean> getAdapter() {
+            public RefreshAdapter<CommunitChlideBean> getAdapter() {
                 if (mAdapter == null) {
-                    mAdapter = new MainHomeVideoAdapter(mContext);
-                    mAdapter.setOnItemClickListener(MainCommunitChlideViewHolder.this);
+                    mAdapter = new MainCommunityAdapter(mContext);
                 }
                 return mAdapter;
             }
 
             @Override
             public void loadData(int p, HttpCallback callback) {
-                HttpUtil.getHomeVideoList(p, callback);
+                HttpUtil.getCommunityList(p, callback);
             }
 
             @Override
-            public List<VideoBean> processData(String[] info) {
-                return JSON.parseArray(Arrays.toString(info), VideoBean.class);
+            public List<CommunitChlideBean> processData(String[] info) {
+                return JSON.parseArray(Arrays.toString(info), CommunitChlideBean.class);
             }
 
             @Override
-            public void onRefresh(List<VideoBean> list) {
-                VideoStorge.getInstance().put(Constants.VIDEO_HOME, list);
+            public void onRefresh(List<CommunitChlideBean> list) {
+
             }
 
             @Override
@@ -93,24 +95,6 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
                 }
             }
         });
-        mLifeCycleListener = new LifeCycleAdapter() {
-            @Override
-            public void onCreate() {
-                EventBus.getDefault().register(MainCommunitChlideViewHolder.this);
-            }
-
-            @Override
-            public void onDestroy() {
-                EventBus.getDefault().unregister(MainCommunitChlideViewHolder.this);
-            }
-        };
-        mVideoScrollDataHelper = new VideoScrollDataHelper() {
-
-            @Override
-            public void loadData(int p, HttpCallback callback) {
-                HttpUtil.getHomeVideoList(p, callback);
-            }
-        };
     }
 
     @Override
@@ -123,30 +107,7 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onVideoScrollPageEvent(VideoScrollPageEvent e) {
-        if (Constants.VIDEO_HOME.equals(e.getKey()) && mRefreshView != null) {
-            mRefreshView.setPage(e.getPage());
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onVideoDeleteEvent(VideoDeleteEvent e) {
-        if (mAdapter != null) {
-            mAdapter.deleteVideo(e.getVideoId());
-            if (mAdapter.getItemCount() == 0 && mRefreshView != null) {
-                mRefreshView.showNoData();
-            }
-        }
-    }
-
     @Override
     public void onItemClick(VideoBean bean, int position) {
-        int page = 1;
-        if (mRefreshView != null) {
-            page = mRefreshView.getPage();
-        }
-        VideoStorge.getInstance().putDataHelper(Constants.VIDEO_HOME, mVideoScrollDataHelper);
-        VideoPlayActivity.forward(mContext, position, Constants.VIDEO_HOME, page);
     }
 }

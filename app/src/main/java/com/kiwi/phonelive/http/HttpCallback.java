@@ -1,6 +1,7 @@
 package com.kiwi.phonelive.http;
 
 import android.app.Dialog;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.callback.AbsCallback;
@@ -38,6 +39,10 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
         if (bean != null) {
             if (200 == bean.getRet()) {
                 Data data = bean.getData();
+                Log.e("aa", "-------------------1111///////////==processData=======" +  data.getMsg());
+//                for (int i=0;i< data.getInfo().length;i++){
+//                    Log.e("aa", "-------------------1111///////////==processData=======" +  data.getInfo()[i]);
+//                }
                 if (data != null) {
                     if (700 == data.getCode()) {
                         //token过期，重新登录
@@ -61,6 +66,7 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
     public void onError(Response<JsonBean> response) {
         Throwable t = response.getException();
         L.e("网络请求错误---->" + t.getClass() + " : " + t.getMessage());
+        Log.e("aa", "-------------------onError///////////==onError=======" +   t.getMessage());
         if (t instanceof SocketTimeoutException || t instanceof ConnectException || t instanceof UnknownHostException || t instanceof UnknownServiceException || t instanceof SocketException) {
             ToastUtil.show(R.string.load_failure);
         }

@@ -1,17 +1,16 @@
 package com.kiwi.phonelive.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kiwi.phonelive.R;
+import com.kiwi.phonelive.bean.CommunitChlideBean;
 import com.kiwi.phonelive.bean.UserBean;
 import com.kiwi.phonelive.bean.VideoBean;
 import com.kiwi.phonelive.glide.ImgLoader;
@@ -20,14 +19,14 @@ import com.kiwi.phonelive.glide.ImgLoader;
  * Created by cxf on 2018/9/26.
  */
 
-public class MainHomeVideoAdapter extends RefreshAdapter<VideoBean> {
+public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBean> {
 
     private static final int FIRST_LINE = 1;
     private static final int NORMAL = 0;
 
     private View.OnClickListener mOnClickListener;
 
-    public MainHomeVideoAdapter(Context context) {
+    public MainCommunityAdapter(Context context) {
         super(context);
         mOnClickListener = new View.OnClickListener() {
             @Override
@@ -98,16 +97,16 @@ public class MainHomeVideoAdapter extends RefreshAdapter<VideoBean> {
             itemView.setOnClickListener(mOnClickListener);
         }
 
-        void setData(VideoBean bean, int position) {
-            itemView.setTag(position);
-            ImgLoader.display(bean.getThumb(), mCover);
-            mTitle.setText(bean.getTitle());
-            mNum.setText(bean.getViewNum());
-            UserBean userBean = bean.getUserBean();
-            if (userBean != null) {
-                ImgLoader.display(userBean.getAvatar(), mAvatar);
-                mName.setText(userBean.getUserNiceName());
-            }
+        void setData(CommunitChlideBean bean, int position) {
+//            itemView.setTag(position);
+//            ImgLoader.display(bean.getThumb(), mCover);
+//            mTitle.setText(bean.getTitle());
+//            mNum.setText(bean.getViewNum());
+//            UserBean userBean = bean.getUserBean();
+//            if (userBean != null) {
+//                ImgLoader.display(userBean.getAvatar(), mAvatar);
+//                mName.setText(userBean.getUserNiceName());
+//            }
         }
     }
 

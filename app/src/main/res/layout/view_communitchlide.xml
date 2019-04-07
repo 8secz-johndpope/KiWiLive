@@ -18,14 +18,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_scrollFlags="scroll|enterAlways">
-
             <FrameLayout
                 android:id="@+id/top_container"
                 android:layout_width="match_parent"
                 android:layout_height="70dp" />
-
             <View style="@style/line2" />
-
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
     <com.kiwi.phonelive.custom.RefreshView

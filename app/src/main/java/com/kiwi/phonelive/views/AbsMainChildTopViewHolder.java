@@ -47,7 +47,6 @@ public abstract class AbsMainChildTopViewHolder extends AbsMainChildViewHolder {
             mTopContainer.removeAllViews();
         }
     }
-
     /**
      * 观看直播
      */

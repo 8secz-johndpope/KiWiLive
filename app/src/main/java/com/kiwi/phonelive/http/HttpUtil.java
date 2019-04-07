@@ -184,7 +184,7 @@ public class HttpUtil {
                         if (code == 0 && info.length > 0) {
                             JSONObject obj = JSON.parseObject(info[0]);
                             UserBean bean = JSON.toJavaObject(obj, UserBean.class);
-                            Log.e("aa","-----------获取列表--"+info[0]);
+                            Log.e("aa", "-----------获取列表--" + info[0]);
                             AppConfig.getInstance().setUserBean(bean);
                             AppConfig.getInstance().setUserItemList(obj.getString("list"));
                             SpUtil.getInstance().setStringValue(SpUtil.USER_INFO, info[0]);
@@ -792,7 +792,7 @@ public class HttpUtil {
     /**
      * 举报用户
      */
-    public static void setReport(String touid, String content,HttpCallback callback) {
+    public static void setReport(String touid, String content, HttpCallback callback) {
         HttpClient.getInstance().get("Live.setReport", HttpConsts.SET_REPORT)
                 .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())
@@ -1443,7 +1443,6 @@ public class HttpUtil {
     }
 
 
-
     /**
      * 举报视频接口
      */
@@ -1715,7 +1714,18 @@ public class HttpUtil {
                 .params("grade", grade)
                 .execute(callback);
     }
+//    社区
 
+    /**
+     * 获取社区列表
+     */
+    public static void getCommunityList(int p, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.get_circle", HttpConsts.COMMUNITY)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .params("page", p)
+                .execute(callback);
+    }
 
 }
 
