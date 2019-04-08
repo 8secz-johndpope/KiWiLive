@@ -112,4 +112,6 @@ dependencies {
     compile 'com.github.yalantis:ucrop:2.2.2'
     //svga
     compile 'com.github.yyued:SVGAPlayer-Android:2.4.0'
+    //圆形头像
+    compile 'de.hdodenhof:circleimageview:3.0.0'
 }
