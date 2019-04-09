@@ -39,6 +39,8 @@
     <dimen name="dip_160">160dip</dimen>
     <dimen name="dip_180">180dip</dimen>
     <dimen name="dip_200">200dip</dimen>
+    <dimen name="dip_210">210dip</dimen>
+    <dimen name="dip_220">220dip</dimen>
     <dimen name="dip_270">270dip</dimen>
     <dimen name="dip_300">300dip</dimen>
     <dimen name="dip_216">216dip</dimen>

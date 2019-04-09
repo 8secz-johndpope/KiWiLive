@@ -1715,7 +1715,6 @@ public class HttpUtil {
                 .execute(callback);
     }
 //    社区
-
     /**
      * 获取社区列表
      */
@@ -1727,6 +1726,24 @@ public class HttpUtil {
                 .execute(callback);
     }
 
+    /**
+     * 获取社区广告头
+     */
+    public static void getSlideHader(HttpCallback callback) {
+        HttpClient.getInstance().get("Home.getSlide", HttpConsts.COMMUNITY)
+                .execute(callback);
+    }
+
+    /**
+     * 关注圈子
+     */
+    public static void getCircle_follow(String cm_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.circle_follow", HttpConsts.COMMUNITY)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .params("cm_id", cm_id)
+                .execute(callback);
+    }
 }
 
 

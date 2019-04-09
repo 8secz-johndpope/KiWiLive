@@ -166,14 +166,12 @@ public class RefreshLayout extends FrameLayout {
         mHeadHeight = dp2px(120);
         mFootHeight = dp2px(120);
         mLoadMoreHeight = mRefreshHeight;
-
         //添加headView
         mHeadView = mInflater.inflate(R.layout.view_refresh_head, this, false);
         mHeadImg = (ImageView) mHeadView.findViewById(R.id.img);
         mHeadLoadingView = mHeadView.findViewById(R.id.loading);
         mHeadTextView = (TextView) mHeadView.findViewById(R.id.text);
         addView(mHeadView);
-
         //添加footView
         mFootView = mInflater.inflate(R.layout.view_refresh_foot, this, false);
         mFootImg = (ImageView) mFootView.findViewById(R.id.img);

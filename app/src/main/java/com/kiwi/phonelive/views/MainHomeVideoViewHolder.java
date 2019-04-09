@@ -2,6 +2,7 @@ package com.kiwi.phonelive.views;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;

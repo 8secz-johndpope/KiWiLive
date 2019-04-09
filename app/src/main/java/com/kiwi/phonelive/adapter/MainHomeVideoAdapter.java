@@ -59,12 +59,10 @@ public class MainHomeVideoAdapter extends RefreshAdapter<VideoBean> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new Vh(mInflater.inflate(viewType == FIRST_LINE ? R.layout.item_main_home_video_2 : R.layout.item_main_home_video, parent, false));
     }
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder vh, int position) {
         ((Vh) vh).setData(mList.get(position), position);
     }
-
     /**
      * 删除视频
      */

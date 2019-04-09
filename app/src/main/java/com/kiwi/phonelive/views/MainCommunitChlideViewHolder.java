@@ -1,15 +1,21 @@
 package com.kiwi.phonelive.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.kiwi.phonelive.Constants;
 import com.kiwi.phonelive.R;
+import com.kiwi.phonelive.activity.MyProfitActivity;
 import com.kiwi.phonelive.activity.VideoPlayActivity;
+import com.kiwi.phonelive.activity.community.Act_CommunityDetails;
 import com.kiwi.phonelive.adapter.MainCommunityAdapter;
 import com.kiwi.phonelive.adapter.MainHomeVideoAdapter;
 import com.kiwi.phonelive.adapter.RefreshAdapter;
@@ -38,7 +44,7 @@ import java.util.List;
  * 社区
  */
 
-public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder implements OnItemClickListener<VideoBean> {
+public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder implements MainCommunityAdapter.backItem {
 
     private MainCommunityAdapter mAdapter;
 
@@ -56,12 +62,15 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
         super.init();
         mRefreshView = (RefreshView) findViewById(R.id.refreshView);
         mRefreshView.setNoDataLayoutId(R.layout.view_no_data_live_communitchlide);
-        mRefreshView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRefreshView.setLayoutManager(new GridLayoutManager(mContext, 1, GridLayoutManager.VERTICAL, false));
+        ItemDecoration decoration = new ItemDecoration(mContext, 0x00000000, 5, 5);
+        decoration.setOnlySetItemOffsetsButNoDraw(true);
         mRefreshView.setDataHelper(new RefreshView.DataHelper<CommunitChlideBean>() {
             @Override
             public RefreshAdapter<CommunitChlideBean> getAdapter() {
                 if (mAdapter == null) {
                     mAdapter = new MainCommunityAdapter(mContext);
+                    mAdapter.setBackItem(MainCommunitChlideViewHolder.this);
                 }
                 return mAdapter;
             }
@@ -88,11 +97,7 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
 
             @Override
             public void onLoadDataCompleted(int dataCount) {
-                if (dataCount < 10) {
-                    mRefreshView.setLoadMoreEnable(false);
-                } else {
-                    mRefreshView.setLoadMoreEnable(true);
-                }
+
             }
         });
     }
@@ -107,7 +112,9 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
         }
     }
 
+
     @Override
-    public void onItemClick(VideoBean bean, int position) {
+    public void backItem(int position, CommunitChlideBean bean) {
+        mContext.startActivity(new Intent(mContext, Act_CommunityDetails.class));
     }
 }

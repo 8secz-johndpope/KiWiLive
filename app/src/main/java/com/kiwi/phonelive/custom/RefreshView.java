@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.adapter.RefreshAdapter;

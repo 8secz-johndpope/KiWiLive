@@ -65,7 +65,7 @@ public class LiveClassActivity extends AbsActivity implements OnItemClickListene
             public RefreshAdapter<LiveBean> getAdapter() {
                 if (mAdapter == null) {
                     mAdapter = new MainHomeHotAdapter(mContext);
-                    mAdapter.setOnItemClickListener(LiveClassActivity.this);
+//                    mAdapter.setOnItemClickListener(LiveClassActivity.this);
                 }
                 return mAdapter;
             }
@@ -82,7 +82,7 @@ public class LiveClassActivity extends AbsActivity implements OnItemClickListene
 
             @Override
             public void onRefresh(List<LiveBean> list) {
-                LiveStorge.getInstance().put(Constants.LIVE_CLASS_PREFIX + mClassId, list);
+//                LiveStorge.getInstance().put(Constants.LIVE_CLASS_PREFIX + mClassId, list);
             }
 
             @Override

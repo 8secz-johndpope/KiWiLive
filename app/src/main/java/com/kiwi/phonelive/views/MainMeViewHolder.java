@@ -166,7 +166,6 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
         mLive.setText(StringUtil.toWan(u.getLives()));
         mFollow.setText(StringUtil.toWan(u.getFollows()));
         mFans.setText(StringUtil.toWan(u.getFans()));
-        Log.e("aa","--------------list==-"+list.size());
         if (list != null && list.size() > 0) {
             if (mAdapter == null) {
                 mAdapter = new MainMeAdapter(mContext, list);

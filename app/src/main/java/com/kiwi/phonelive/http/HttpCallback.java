@@ -39,7 +39,6 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
         if (bean != null) {
             if (200 == bean.getRet()) {
                 Data data = bean.getData();
-                Log.e("aa", "-------------------1111///////////==processData=======" +  data.getMsg());
 //                for (int i=0;i< data.getInfo().length;i++){
 //                    Log.e("aa", "-------------------1111///////////==processData=======" +  data.getInfo()[i]);
 //                }
@@ -66,7 +65,6 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
     public void onError(Response<JsonBean> response) {
         Throwable t = response.getException();
         L.e("网络请求错误---->" + t.getClass() + " : " + t.getMessage());
-        Log.e("aa", "-------------------onError///////////==onError=======" +   t.getMessage());
         if (t instanceof SocketTimeoutException || t instanceof ConnectException || t instanceof UnknownHostException || t instanceof UnknownServiceException || t instanceof SocketException) {
             ToastUtil.show(R.string.load_failure);
         }
