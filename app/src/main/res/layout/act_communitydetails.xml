@@ -114,11 +114,19 @@
                 android:textSize="@dimen/fond_12sp" />
         </RelativeLayout>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_01"
+            android:layout_marginLeft="@dimen/dip_10"
+            android:layout_marginTop="@dimen/album_dp_15"
+            android:layout_marginRight="@dimen/dip_10"
+            android:background="#EDEDED" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dip_10"
-            android:layout_marginTop="@dimen/dip_30"
+            android:layout_marginTop="@dimen/dip_15"
             android:layout_marginRight="@dimen/dip_10"
             android:orientation="horizontal">
 
@@ -165,5 +173,46 @@
                     android:textColor="#9B9B9B" />
             </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dip_10">
+
+            <ImageView
+                android:layout_width="@dimen/dip_50"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_gonggao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/dip_10"
+                android:text="收本子啦 ！不管2D3D萝莉御姐各种口味…"
+                android:textColor="#4A4A4A" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_5"
+            android:background="#F9F9FB" />
+        <com.kiwi.phonelive.custom.ViewPagerIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="28dp"
+            app:bold="true"
+            app:change_size="false"
+            app:currentItem="1"
+            app:indicatorColor="@color/global"
+            app:indicatorHeight="3dp"
+            app:indicatorWidth="22dp"
+            app:lightColor="@color/textColor"
+            app:normalColor="@color/gray1"
+            app:title_textSize="18sp"
+            app:visibleItemCount="3"
+            />
     </LinearLayout>
 </RelativeLayout>
