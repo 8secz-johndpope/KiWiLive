@@ -67,7 +67,8 @@
     <string name="fans_no_fans_2">TA还没有任何粉丝</string>
     <string name="find_pwd_forget">忘记密码</string>
     <string name="find_pwd_find">立即找回</string>
-
+    <string name="dynamic_name">动态</string>
+    <string name="video_name">视频</string>
     <string name="guard_choose_duration">选择守护时长</string>
     <string name="guard_right">选择特权</string>
     <string name="guard_buy">立即开通</string>

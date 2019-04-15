@@ -19,7 +19,7 @@
         app:indicatorColor="@color/global"
         app:indicatorHeight="3dp"
         app:indicatorWidth="22dp"
-        app:lightColor="@color/textColor"
+        app:lightColor="@color/global"
         app:normalColor="@color/gray1"
         app:title_textSize="18sp"
         app:visibleItemCount="3"
