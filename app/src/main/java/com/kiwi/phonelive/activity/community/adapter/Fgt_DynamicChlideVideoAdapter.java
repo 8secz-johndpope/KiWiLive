@@ -1,4 +1,4 @@
-package com.kiwi.phonelive.adapter;
+package com.kiwi.phonelive.activity.community.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,19 +9,18 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.kiwi.phonelive.R;
-import com.kiwi.phonelive.bean.CommunitChlideBean;
-import com.kiwi.phonelive.glide.ImgLoader;
+import com.kiwi.phonelive.activity.community.bean.Fgt_VideoBean;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
-public class CommunityGridViewAdapter extends BaseAdapter {
-    private List<String> mNameList;
+public class Fgt_DynamicChlideVideoAdapter extends BaseAdapter {
+    List<Fgt_VideoBean> mNameList;
     private LayoutInflater mInflater;
     private Context mContext;
     LinearLayout.LayoutParams params;
 
-    public CommunityGridViewAdapter(Context context, List<String> nameList) {
+    public Fgt_DynamicChlideVideoAdapter(Context context, List<Fgt_VideoBean> nameList) {
         mNameList = nameList;
         mContext = context;
         mInflater = LayoutInflater.from(context);
@@ -42,13 +41,13 @@ public class CommunityGridViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemViewTag viewTag;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_communitygridviewadapter, null);
+            convertView = mInflater.inflate(R.layout.item_dynamiclmagechlidevideoadapter, null);
             viewTag = new ItemViewTag((RoundedImageView) convertView.findViewById(R.id.grid_icon));
             convertView.setTag(viewTag);
         } else {
             viewTag = (ItemViewTag) convertView.getTag();
         }
-        ImgLoader.displayAvatar(mNameList.get(position), viewTag.mIcon);
+        Glide.with(mContext).load(mNameList.get(position).getVideo_img()).error(R.mipmap.icon_video_home_bottom).placeholder(R.mipmap.icon_video_home_bottom).into(viewTag.mIcon);
         return convertView;
     }
 

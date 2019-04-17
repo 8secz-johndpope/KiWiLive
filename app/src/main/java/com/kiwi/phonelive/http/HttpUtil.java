@@ -1,5 +1,6 @@
 package com.kiwi.phonelive.http;
 
+import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -184,7 +185,6 @@ public class HttpUtil {
                         if (code == 0 && info.length > 0) {
                             JSONObject obj = JSON.parseObject(info[0]);
                             UserBean bean = JSON.toJavaObject(obj, UserBean.class);
-                            Log.e("aa", "-----------获取列表--" + info[0]);
                             AppConfig.getInstance().setUserBean(bean);
                             AppConfig.getInstance().setUserItemList(obj.getString("list"));
                             SpUtil.getInstance().setStringValue(SpUtil.USER_INFO, info[0]);
@@ -1715,10 +1715,12 @@ public class HttpUtil {
                 .execute(callback);
     }
 //    社区
+
     /**
      * 获取社区列表
      */
     public static void getCommunityList(int p, HttpCallback callback) {
+//        Log.e("aa", "-----uid==" + AppConfig.getInstance().getUid() + "-----token==" + AppConfig.getInstance().getToken());
         HttpClient.getInstance().get("Community.get_circle", HttpConsts.COMMUNITY)
                 .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())
@@ -1744,6 +1746,39 @@ public class HttpUtil {
                 .params("cm_id", cm_id)
                 .execute(callback);
     }
+
+    /**
+     * 获取社区详情头部信息
+     */
+    public static void getCommunity_info(String cm_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.community_info", HttpConsts.COMMUNITY)
+                .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
+    /**
+     * 获取社区动态列表信息
+     */
+    public static void getCommunity_get_post(int com_page, String cm_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.get_post", HttpConsts.COMMUNITY)
+                .params("cm_id", cm_id)
+                .params("token", AppConfig.getInstance().getToken())
+                .params("com_page", com_page + "")
+                .execute(callback);
+    }
+
+    /**
+     * 获取社区视频列表信息
+     */
+    public static void getcommunity_video(String cm_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.community_video", HttpConsts.COMMUNITY)
+                .params("cm_id", cm_id)
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
 }
 
 

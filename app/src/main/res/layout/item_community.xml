@@ -8,10 +8,11 @@
     <LinearLayout
         android:id="@+id/item_llbana"
         android:layout_width="match_parent"
-        android:paddingBottom="@dimen/dip_20"
-        android:paddingTop="@dimen/dip_20"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dip_20"
+        android:paddingBottom="@dimen/dip_20">
+
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
@@ -159,19 +160,24 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/item_Image"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="239dp"
-            android:layout_marginLeft="@dimen/dip_10"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="@dimen/dip_10"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            app:riv_border_color="#333333"
-            app:riv_corner_radius="@dimen/dip_2"
-            app:riv_mutate_background="true"
-            app:riv_tile_mode="repeat" />
+            android:layout_height="wrap_content">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/item_Image"
+                android:layout_width="200dip"
+                android:layout_height="300dip"
+                android:layout_marginLeft="@dimen/dip_10"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="@dimen/dip_10"
+                android:scaleType="centerCrop"
+                app:riv_border_color="#333333"
+                app:riv_corner_radius="@dimen/dip_2"
+                app:riv_mutate_background="true"
+                app:riv_tile_mode="repeat" />
+
+        </RelativeLayout>
 
         <com.kiwi.phonelive.views.AntGrideVIew
             android:id="@+id/gv_DynamicPics"
@@ -189,91 +195,98 @@
             android:id="@+id/item_img_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/item_img_lo6_1"
-                android:layout_width="0dip"
-                android:layout_height="@dimen/dip_230"
-                android:layout_marginRight="@dimen/dip_5"
-                android:layout_weight="2"
-                android:scaleType="centerCrop"
-                app:riv_border_color="#333333"
-                app:riv_corner_radius="@dimen/dip_5"
-                app:riv_mutate_background="true"
-                app:riv_tile_mode="repeat" />
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/item_img_lo6_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dip"
-                    android:layout_marginBottom="@dimen/dip_3"
-                    android:layout_weight="1"
+                    android:id="@+id/item_img_lo6_1"
+                    android:layout_width="0dip"
+
+                    android:layout_height="@dimen/dip_230"
+                    android:layout_marginRight="@dimen/dip_5"
+                    android:layout_weight="2"
                     android:scaleType="centerCrop"
                     app:riv_border_color="#333333"
                     app:riv_corner_radius="@dimen/dip_5"
                     app:riv_mutate_background="true"
                     app:riv_tile_mode="repeat" />
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/item_img_lo6_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dip"
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
+                    android:orientation="vertical">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/item_img_lo6_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dip"
+                        android:layout_marginBottom="@dimen/dip_3"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:riv_border_color="#333333"
+                        app:riv_corner_radius="@dimen/dip_5"
+                        app:riv_mutate_background="true"
+                        app:riv_tile_mode="repeat" />
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/item_img_lo6_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dip"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        app:riv_border_color="#333333"
+                        app:riv_corner_radius="@dimen/dip_5"
+                        app:riv_mutate_background="true"
+                        app:riv_tile_mode="repeat" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_120"
+                android:layout_marginTop="@dimen/dip_5"
+                android:orientation="horizontal">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/item_img_lo6_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingRight="@dimen/dip_5"
+                    android:scaleType="fitXY"
+                    app:riv_border_color="#333333"
+                    app:riv_corner_radius="@dimen/dip_5"
+                    app:riv_mutate_background="true"
+                    app:riv_tile_mode="repeat" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/item_img_lo6_5"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingRight="@dimen/dip_5"
+                    android:scaleType="fitXY"
+                    app:riv_border_color="#333333"
+                    app:riv_corner_radius="@dimen/dip_5"
+                    app:riv_mutate_background="true"
+                    app:riv_tile_mode="repeat" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/item_img_lo6_6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
                     app:riv_border_color="#333333"
                     app:riv_corner_radius="@dimen/dip_5"
                     app:riv_mutate_background="true"
                     app:riv_tile_mode="repeat" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dip_120"
-            android:layout_marginTop="@dimen/dip_5"
-            android:orientation="horizontal">
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/item_img_lo6_4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingRight="@dimen/dip_5"
-                android:scaleType="fitXY"
-                app:riv_border_color="#333333"
-                app:riv_corner_radius="@dimen/dip_5"
-                app:riv_mutate_background="true"
-                app:riv_tile_mode="repeat" />
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/item_img_lo6_5"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingRight="@dimen/dip_5"
-                android:scaleType="fitXY"
-                app:riv_border_color="#333333"
-                app:riv_corner_radius="@dimen/dip_5"
-                app:riv_mutate_background="true"
-                app:riv_tile_mode="repeat" />
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/item_img_lo6_6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:riv_border_color="#333333"
-                app:riv_corner_radius="@dimen/dip_5"
-                app:riv_mutate_background="true"
-                app:riv_tile_mode="repeat" />
         </LinearLayout>
 
         <RelativeLayout

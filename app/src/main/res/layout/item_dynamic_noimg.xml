@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dip_10"
+    android:orientation="vertical"
+   >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_1"
+        android:background="#f0f0f0" />
+
+    <TextView
+        android:id="@+id/item_img_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dip_10"
+        android:text="你好"
+        android:textColor="#4A4A4A"
+        android:textSize="@dimen/fond_16sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dip_10">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_square_header"
+            android:layout_width="@dimen/dip_30"
+            android:layout_height="@dimen/dip_30"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_test"
+            app:riv_oval="true" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/dip_5"
+            android:text="发的的"
+            android:textColor="#4A4A4A"
+            android:textSize="@dimen/fond_14sp" />
+    </LinearLayout>
+</LinearLayout>

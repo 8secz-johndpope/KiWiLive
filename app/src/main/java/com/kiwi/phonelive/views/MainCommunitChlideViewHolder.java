@@ -20,6 +20,7 @@ import com.kiwi.phonelive.adapter.MainCommunityAdapter;
 import com.kiwi.phonelive.adapter.MainHomeVideoAdapter;
 import com.kiwi.phonelive.adapter.RefreshAdapter;
 import com.kiwi.phonelive.bean.CommunitChlideBean;
+import com.kiwi.phonelive.bean.CommunitChlideBeanZhu;
 import com.kiwi.phonelive.bean.VideoBean;
 import com.kiwi.phonelive.custom.ItemDecoration;
 import com.kiwi.phonelive.custom.RefreshView;
@@ -65,9 +66,9 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
         mRefreshView.setLayoutManager(new GridLayoutManager(mContext, 1, GridLayoutManager.VERTICAL, false));
         ItemDecoration decoration = new ItemDecoration(mContext, 0x00000000, 5, 5);
         decoration.setOnlySetItemOffsetsButNoDraw(true);
-        mRefreshView.setDataHelper(new RefreshView.DataHelper<CommunitChlideBean>() {
+        mRefreshView.setDataHelper(new RefreshView.DataHelper<CommunitChlideBeanZhu>() {
             @Override
-            public RefreshAdapter<CommunitChlideBean> getAdapter() {
+            public RefreshAdapter<CommunitChlideBeanZhu> getAdapter() {
                 if (mAdapter == null) {
                     mAdapter = new MainCommunityAdapter(mContext);
                     mAdapter.setBackItem(MainCommunitChlideViewHolder.this);
@@ -77,16 +78,17 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
 
             @Override
             public void loadData(int p, HttpCallback callback) {
+
                 HttpUtil.getCommunityList(p, callback);
             }
 
             @Override
-            public List<CommunitChlideBean> processData(String[] info) {
-                return JSON.parseArray(Arrays.toString(info), CommunitChlideBean.class);
+            public List<CommunitChlideBeanZhu> processData(String[] info) {
+                return JSON.parseArray(Arrays.toString(info), CommunitChlideBeanZhu.class);
             }
 
             @Override
-            public void onRefresh(List<CommunitChlideBean> list) {
+            public void onRefresh(List<CommunitChlideBeanZhu> list) {
 
             }
 
@@ -114,7 +116,9 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
 
 
     @Override
-    public void backItem(int position, CommunitChlideBean bean) {
-        mContext.startActivity(new Intent(mContext, Act_CommunityDetails.class));
+    public void backItem(int position, CommunitChlideBeanZhu bean) {
+        Intent intent = new Intent(mContext, Act_CommunityDetails.class);
+        intent.putExtra("cm_id", bean.getId() + "");
+        mContext.startActivity(intent);
     }
 }

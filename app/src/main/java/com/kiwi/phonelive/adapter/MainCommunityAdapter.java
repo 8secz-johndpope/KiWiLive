@@ -1,6 +1,7 @@
 package com.kiwi.phonelive.adapter;
 
 import android.content.Context;
+import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.bumptech.glide.Glide;
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.bean.CommunitChlideBean;
+import com.kiwi.phonelive.bean.CommunitChlideBeanZhu;
 import com.kiwi.phonelive.bean.GlideImageLoader;
 import com.kiwi.phonelive.bean.SlideHaderBean;
 import com.kiwi.phonelive.bean.UserBean;
@@ -39,7 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by cxf on 2018/9/26.
  */
 
-public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBean> {
+public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> {
     private static final int FIRST_LINE = 1;
     private static final int NORMAL = 0;
     private backItem backItem;
@@ -115,7 +117,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBean> {
 
         List<String> image = new ArrayList<>();
 
-        void setData(final CommunitChlideBean bean, final int position) {
+        void setData(final CommunitChlideBeanZhu bean, final int position) {
             follow_status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -155,23 +157,28 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBean> {
                 follow_status.setText("+ 关注");
 
             }
-            if (bean.getImgs().size() == 1) {//一张图片
+            if (bean.getUser_info() == null) {//没有图片没有视频情况
+                myGridView.setVisibility(View.GONE);
+                item_Image.setVisibility(View.GONE);
+                llImg.setVisibility(View.GONE);
+            } else if (bean.getUser_info() != null && bean.getUser_info().size() == 1) {//一张图片
                 myGridView.setVisibility(View.GONE);
                 item_Image.setVisibility(View.VISIBLE);
                 llImg.setVisibility(View.GONE);
-                ImgLoader.displayAvatar(bean.getImgs().get(0).getImgs(), item_Image);
-            } else if (bean.getImgs().size() == 6) {//6张图片
+                ImgLoader.displayAvatar(bean.getUser_info().get(0), item_Image);
+            } else if (bean.getUser_info() != null && bean.getUser_info().size() == 6) {//6张图片
+                llImg.setVisibility(View.VISIBLE);
                 myGridView.setVisibility(View.GONE);
                 item_Image.setVisibility(View.GONE);
                 llImg.setVisibility(View.VISIBLE);
-                for (int i = 0; i < bean.getImgs().size(); i++) {
-                    ImgLoader.displayAvatar(bean.getImgs().get(i).getImgs(), img6[i]);
+                for (int i = 0; i < bean.getUser_info().size(); i++) {
+                    ImgLoader.displayAvatar(bean.getUser_info().get(i), img6[i]);
                 }
-            } else {//其它情况
+            } else if (bean.getUser_info().size() > 1) {//其它情况
                 myGridView.setVisibility(View.VISIBLE);
                 llImg.setVisibility(View.GONE);
                 item_Image.setVisibility(View.GONE);
-                CommunityGridViewAdapter adapter = new CommunityGridViewAdapter(mContext, bean.getImgs());
+                CommunityGridViewAdapter adapter = new CommunityGridViewAdapter(mContext, bean.getUser_info());
                 myGridView.setAdapter(adapter);
             }
             user_count.setText("关注  " + bean.getUser_count());
@@ -231,7 +238,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBean> {
      */
     SVProgressHUD mSVProgressHUD;
 
-    public void setCircle_follow(final String cm_id, final int position) {
+    public void setCircle_follow(String cm_id, final int position) {
         mSVProgressHUD = new SVProgressHUD(mContext);
         mSVProgressHUD.showWithStatus("请稍后...");
         mSVProgressHUD.show();
@@ -262,6 +269,6 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBean> {
     }
 
     public interface backItem {
-        void backItem(int position, CommunitChlideBean bean);
+        void backItem(int position, CommunitChlideBeanZhu bean);
     }
 }

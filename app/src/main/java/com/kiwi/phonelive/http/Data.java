@@ -32,4 +32,5 @@ public class Data {
     public void setInfo(String[] info) {
         this.info = info;
     }
+
 }

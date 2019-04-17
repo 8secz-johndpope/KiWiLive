@@ -202,6 +202,10 @@
         <activity
             android:name=".activity.community.Act_CommunityDetails"
             android:screenOrientation="portrait" />
+        <!--公告详情-->
+        <activity
+            android:name=".activity.community.Act_AnnouncementDetails"
+            android:screenOrientation="portrait" />
         <!--微信登录回调页面-->
         <activity
             android:name=".wxapi.WXEntryActivity"

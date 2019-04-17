@@ -14,8 +14,17 @@ public class CommunitChlideBean {
              * user_info : ["http://qiniu.enuos.net/20190325/5c9884edb300a.png","http://qiniu.enuos.net/20190325/5c9884edb300a.png","http://qiniu.enuos.net/20190325/5c98843b951a7.png","http://qiniu.enuos.net/20190325/5c9884304333c.png"]
              * post_count : 20
              */
+            private String notice;
 
-            private String id;
+    public String getNotice() {
+        return notice;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
+    }
+
+    private String id;
             private String community_name;
             private String community_desc;
             private String avatar_icon;

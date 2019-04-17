@@ -1,4 +1,4 @@
-package com.kiwi.phonelive.adapter;
+package com.kiwi.phonelive.activity.community.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,19 +9,17 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.kiwi.phonelive.R;
-import com.kiwi.phonelive.bean.CommunitChlideBean;
-import com.kiwi.phonelive.glide.ImgLoader;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
-public class CommunityGridViewAdapter extends BaseAdapter {
+public class Fgt_DynamicChlideAdapter extends BaseAdapter {
     private List<String> mNameList;
     private LayoutInflater mInflater;
     private Context mContext;
     LinearLayout.LayoutParams params;
 
-    public CommunityGridViewAdapter(Context context, List<String> nameList) {
+    public Fgt_DynamicChlideAdapter(Context context, List<String> nameList) {
         mNameList = nameList;
         mContext = context;
         mInflater = LayoutInflater.from(context);
@@ -42,13 +40,13 @@ public class CommunityGridViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemViewTag viewTag;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_communitygridviewadapter, null);
+            convertView = mInflater.inflate(R.layout.item_dynamiclmagechlideadapter, null);
             viewTag = new ItemViewTag((RoundedImageView) convertView.findViewById(R.id.grid_icon));
             convertView.setTag(viewTag);
         } else {
             viewTag = (ItemViewTag) convertView.getTag();
         }
-        ImgLoader.displayAvatar(mNameList.get(position), viewTag.mIcon);
+        Glide.with(mContext).load(mNameList.get(position)).error(R.mipmap.icon_video_home_bottom).placeholder(R.mipmap.icon_video_home_bottom).into(viewTag.mIcon);
         return convertView;
     }
 

@@ -130,7 +130,6 @@ public class MainMeViewHolder extends AbsMainChildViewHolder implements OnItemCl
             AppConfig appConfig = AppConfig.getInstance();
             UserBean u = appConfig.getUserBean();
             List<UserItemBean> list = appConfig.getUserItemList();
-            Log.e("aa","-----------测试===111=="+list.size());
             if (u != null && list != null) {
                 showData(u, list);
             }
