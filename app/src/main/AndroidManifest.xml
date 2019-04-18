@@ -206,6 +206,18 @@
         <activity
             android:name=".activity.community.Act_AnnouncementDetails"
             android:screenOrientation="portrait" />
+        <!--公告详情=>详情-->
+        <activity
+            android:name=".activity.community.Act_CommunityChlideDetails"
+            android:screenOrientation="portrait" />
+        <!--活跃用户列表-->
+        <activity
+            android:name=".activity.community.Act_ActiveUsers"
+            android:screenOrientation="portrait" />
+        <!--视频或图片评论页-->
+        <activity
+            android:name=".activity.community.Act_VideoImgDetlie"
+            android:screenOrientation="portrait" />
         <!--微信登录回调页面-->
         <activity
             android:name=".wxapi.WXEntryActivity"

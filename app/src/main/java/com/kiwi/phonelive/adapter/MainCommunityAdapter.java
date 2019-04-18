@@ -1,6 +1,7 @@
 package com.kiwi.phonelive.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,14 +9,20 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.bumptech.glide.Glide;
 import com.kiwi.phonelive.R;
+import com.kiwi.phonelive.activity.community.Act_ActiveUsers;
+import com.kiwi.phonelive.activity.community.Act_CommunityChlideDetails;
+import com.kiwi.phonelive.activity.community.Act_CommunityDetails;
+import com.kiwi.phonelive.activity.community.Act_VideoImgDetlie;
 import com.kiwi.phonelive.bean.CommunitChlideBean;
 import com.kiwi.phonelive.bean.CommunitChlideBeanZhu;
 import com.kiwi.phonelive.bean.GlideImageLoader;
@@ -50,8 +57,11 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
         this.backItem = backItem;
     }
 
+    Context context1;
+
     public MainCommunityAdapter(Context context) {
         super(context);
+        context1 = context;
     }
 
     @Override
@@ -88,6 +98,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
         private LinearLayout llImg, ll_minImg, item_llbana;
         private RoundedImageView[] img6 = new RoundedImageView[7];
         private Banner banner;
+        private RelativeLayout imgll;
 
         public Vh(View itemView) {
             super(itemView);
@@ -100,6 +111,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
             post_count = itemView.findViewById(R.id.post_count);
             ll_minImg = itemView.findViewById(R.id.ll_minImg);
             item_llbana = itemView.findViewById(R.id.item_llbana);
+            imgll = itemView.findViewById(R.id.haderImagell);
             had1 = itemView.findViewById(R.id.had1);
             had2 = itemView.findViewById(R.id.had2);
             had3 = itemView.findViewById(R.id.had3);
@@ -113,6 +125,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
             img6[3] = itemView.findViewById(R.id.item_img_lo6_4);
             img6[4] = itemView.findViewById(R.id.item_img_lo6_5);
             img6[5] = itemView.findViewById(R.id.item_img_lo6_6);
+
         }
 
         List<String> image = new ArrayList<>();
@@ -165,17 +178,51 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                 myGridView.setVisibility(View.GONE);
                 item_Image.setVisibility(View.VISIBLE);
                 llImg.setVisibility(View.GONE);
+                item_Image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
+                        intent.putExtra("cm_id", bean.getCm_id() + "");
+                        intent.putExtra("status", "img");
+                        mContext.startActivity(intent);
+                    }
+                });
                 ImgLoader.displayAvatar(bean.getUser_info().get(0), item_Image);
             } else if (bean.getUser_info() != null && bean.getUser_info().size() == 6) {//6张图片
                 llImg.setVisibility(View.VISIBLE);
                 myGridView.setVisibility(View.GONE);
                 item_Image.setVisibility(View.GONE);
                 llImg.setVisibility(View.VISIBLE);
+                llImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (bean.getRecommend_info() != null) {
+                            Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
+                            intent.putExtra("cm_id", bean.getCm_id() + "");
+                            intent.putExtra("video", "img");
+                            mContext.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
+                            intent.putExtra("cm_id", bean.getCm_id() + "");
+                            intent.putExtra("status", "img");
+                            mContext.startActivity(intent);
+                        }
+                    }
+                });
                 for (int i = 0; i < bean.getUser_info().size(); i++) {
                     ImgLoader.displayAvatar(bean.getUser_info().get(i), img6[i]);
                 }
             } else if (bean.getUser_info().size() > 1) {//其它情况
                 myGridView.setVisibility(View.VISIBLE);
+                myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
+                        intent.putExtra("cm_id", bean.getCm_id() + "");
+                        intent.putExtra("status", "img");
+                        mContext.startActivity(intent);
+                    }
+                });
                 llImg.setVisibility(View.GONE);
                 item_Image.setVisibility(View.GONE);
                 CommunityGridViewAdapter adapter = new CommunityGridViewAdapter(mContext, bean.getUser_info());
@@ -227,6 +274,16 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                     had4.setVisibility(View.VISIBLE);
                     break;
             }
+            imgll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(context1, Act_ActiveUsers.class);
+                    intent1.putExtra("cm_id", bean.getCm_id());
+                    intent1.putExtra("title", bean.getCommunity_name());
+                    context1.startActivity(intent1);
+                }
+            });
+
         }
     }
 

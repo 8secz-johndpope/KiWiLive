@@ -35,6 +35,9 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
 
     @Override
     public void onSuccess(Response<JsonBean> response) {
+        if (showLoadingDialog() && mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
         JsonBean bean = response.body();
         if (bean != null) {
             if (200 == bean.getRet()) {
@@ -75,7 +78,9 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
     }
 
     public void onError() {
-
+        if (showLoadingDialog() && mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
     }
 
 

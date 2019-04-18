@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -32,30 +33,22 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/dip_10"
                 android:paddingRight="@dimen/dip_20"
-                android:text="女神聚集地"
                 android:textColor="@color/bg_black"
                 android:textSize="@dimen/fond_18sp"
                 android:textStyle="bold" />
         </RelativeLayout>
     </RelativeLayout>
 
-    <View
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_1"
-        android:background="#f0f0f0" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="公告详情"
-        android:layout_marginTop="@dimen/dip_20"
-        android:textSize="@dimen/fond_16sp"
-        android:paddingLeft="@dimen/dip_10"
-        android:textColor="@color/bg_black"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/my_notice"
-        android:layout_width="wrap_content"
-        android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容 "
-        android:paddingLeft="@dimen/dip_10"
-        android:layout_marginTop="@dimen/dip_20"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dip_10"
+        android:text="公展示前20位最近活跃用户"
+        android:textColor="#4A4A4A"
+        android:textSize="@dimen/fond_14sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ActiveUsers_RecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

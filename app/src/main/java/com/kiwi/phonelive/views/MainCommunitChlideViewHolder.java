@@ -3,39 +3,19 @@ package com.kiwi.phonelive.views;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.kiwi.phonelive.Constants;
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.kiwi.phonelive.R;
-import com.kiwi.phonelive.activity.MyProfitActivity;
-import com.kiwi.phonelive.activity.VideoPlayActivity;
 import com.kiwi.phonelive.activity.community.Act_CommunityDetails;
 import com.kiwi.phonelive.adapter.MainCommunityAdapter;
-import com.kiwi.phonelive.adapter.MainHomeVideoAdapter;
 import com.kiwi.phonelive.adapter.RefreshAdapter;
-import com.kiwi.phonelive.bean.CommunitChlideBean;
 import com.kiwi.phonelive.bean.CommunitChlideBeanZhu;
-import com.kiwi.phonelive.bean.VideoBean;
 import com.kiwi.phonelive.custom.ItemDecoration;
 import com.kiwi.phonelive.custom.RefreshView;
-import com.kiwi.phonelive.event.VideoDeleteEvent;
-import com.kiwi.phonelive.event.VideoScrollPageEvent;
 import com.kiwi.phonelive.http.HttpCallback;
 import com.kiwi.phonelive.http.HttpUtil;
-import com.kiwi.phonelive.interfaces.LifeCycleAdapter;
-import com.kiwi.phonelive.interfaces.OnItemClickListener;
-import com.kiwi.phonelive.interfaces.VideoScrollDataHelper;
-import com.kiwi.phonelive.utils.VideoStorge;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +24,6 @@ import java.util.List;
  * Created by cxf on 2018/9/22.
  * 社区
  */
-
 public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder implements MainCommunityAdapter.backItem {
 
     private MainCommunityAdapter mAdapter;

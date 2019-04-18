@@ -3,6 +3,7 @@ package com.kiwi.phonelive.activity.community;
 import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.kiwi.phonelive.R;
@@ -14,6 +15,9 @@ public class Act_AnnouncementDetails extends AbsActivity {
         return R.layout.act_announcementdetails;
     }
 
+    private String notice, tvTitle;
+    private TextView tvNotice, title;
+
     @Override
     protected void main() {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -24,6 +28,12 @@ public class Act_AnnouncementDetails extends AbsActivity {
     }
 
     public void initView() {
+        tvNotice = findViewById(R.id.my_notice);
+        title = findViewById(R.id.my_notice_title);
+        notice = getIntent().getStringExtra("notice");
+        tvTitle = getIntent().getStringExtra("title");
+        tvNotice.setText(notice);
+        title.setText(tvTitle);
     }
 
     public void initData() {

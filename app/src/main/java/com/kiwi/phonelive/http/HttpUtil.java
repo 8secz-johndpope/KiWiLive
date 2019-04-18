@@ -1779,6 +1779,49 @@ public class HttpUtil {
                 .execute(callback);
     }
 
+    /**
+     * 获取社区视频列表信息
+     */
+    public static void community_desc(String cm_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.community_desc", HttpConsts.COMMUNITY)
+                .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
+    /**
+     * 获取活跃用户列表
+     */
+    public static void active_users(String cm_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.active_users", HttpConsts.COMMUNITY)
+                .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
+    /**
+     * 获取视频或图片头部
+     */
+    public static void post_info(String cm_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.post_info", HttpConsts.COMMUNITY)
+                .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
+    /**
+     * 获取评论列表
+     */
+    public static void post_comment(String post_id, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.post_comment", HttpConsts.COMMUNITY)
+                .params("post_id", post_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
 }
 
 

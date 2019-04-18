@@ -44,7 +44,7 @@ import cn.jpush.im.android.eventbus.EventBus;
 /**
  * 社区详情页
  */
-public class Act_CommunityDetails extends AbsActivity {
+public class Act_CommunityDetails extends AbsActivity implements View.OnClickListener {
     private ViewPagerIndicator mIndicator;
     public ViewPager mViewPager;
     private List<BaseFragment> fragments = new ArrayList<>();
@@ -74,13 +74,8 @@ public class Act_CommunityDetails extends AbsActivity {
         mSVProgressHUD.showWithStatus("请稍后...");
         avatar = findViewById(R.id.avatar);
         notice = findViewById(R.id.notice);
-        notice.setOnClickListener(new View.OnClickListener() {//公告
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Act_CommunityDetails.this, Act_AnnouncementDetails.class);
-                startActivity(intent);
-            }
-        });
+        notice.setOnClickListener(this);
+        findViewById(R.id.my_Details).setOnClickListener(this);
         name = findViewById(R.id.community_name);
         community_desc = findViewById(R.id.community_desc);
         mRefreshLayout = findViewById(R.id.refreshLayout);
@@ -153,6 +148,28 @@ public class Act_CommunityDetails extends AbsActivity {
         postHader();
     }
 
+    @Override
+    public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.my_Details://详情
+                    Intent intent1 = new Intent(Act_CommunityDetails.this, Act_CommunityChlideDetails.class);
+                    intent1.putExtra("cm_id",cm_id);
+                    intent1.putExtra("title", bean.getCommunity_name());
+                    startActivity(intent1);
+                    break;
+                case R.id.notice://公告
+                    if (bean == null) {
+                        return;
+                    }
+                    Intent intent = new Intent(Act_CommunityDetails.this, Act_AnnouncementDetails.class);
+                    intent.putExtra("notice", bean.getNotice());
+                    intent.putExtra("title", bean.getCommunity_name());
+                    startActivity(intent);
+                    break;
+            }
+
+    }
+
     /**
      * 内容页的适配器
      */
@@ -212,6 +229,11 @@ public class Act_CommunityDetails extends AbsActivity {
                     } else {//设置关注
                         bean.setFollow_status(1);
                         ToastUtil.show(msg);
+                    }
+                    if (bean.getFollow_status() == 1) {
+                        follow_status.setText("已关注");
+                    } else {
+                        follow_status.setText("+ 关注");
                     }
                 } else {
                     if (bean.getFollow_status() == 1) {//取消关注
