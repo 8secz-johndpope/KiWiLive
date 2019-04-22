@@ -38,6 +38,7 @@ import com.kiwi.phonelive.views.AntGrideVIew;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.youth.banner.Banner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -183,6 +184,8 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                     public void onClick(View v) {
                         Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
                         intent.putExtra("cm_id", bean.getCm_id() + "");
+                        intent.putExtra("post_id",bean.getId());
+                        intent.putExtra("bean", (Serializable) bean);
                         intent.putExtra("status", "img");
                         mContext.startActivity(intent);
                     }
@@ -199,11 +202,15 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                         if (bean.getRecommend_info() != null) {
                             Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
                             intent.putExtra("cm_id", bean.getCm_id() + "");
+                            intent.putExtra("post_id",bean.getId());
+                            intent.putExtra("bean", bean);
                             intent.putExtra("video", "img");
                             mContext.startActivity(intent);
                         } else {
                             Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
                             intent.putExtra("cm_id", bean.getCm_id() + "");
+                            intent.putExtra("post_id",bean.getId());
+                            intent.putExtra("bean", bean);
                             intent.putExtra("status", "img");
                             mContext.startActivity(intent);
                         }
@@ -219,6 +226,8 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
                         intent.putExtra("cm_id", bean.getCm_id() + "");
+                        intent.putExtra("post_id",bean.getId());
+                        intent.putExtra("bean", (Serializable) bean);
                         intent.putExtra("status", "img");
                         mContext.startActivity(intent);
                     }

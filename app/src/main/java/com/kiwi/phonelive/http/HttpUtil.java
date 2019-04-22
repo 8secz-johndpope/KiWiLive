@@ -1804,11 +1804,11 @@ public class HttpUtil {
     /**
      * 获取视频或图片头部
      */
-    public static void post_info(String cm_id, HttpCallback callback) {
+    public static void post_info(String post_id, String cm_id, HttpCallback callback) {
         HttpClient.getInstance().get("Community.post_info", HttpConsts.COMMUNITY)
+                .params("post_id", post_id)
                 .params("cm_id", cm_id)
                 .params("uid", AppConfig.getInstance().getUid())
-                .params("token", AppConfig.getInstance().getToken())
                 .execute(callback);
     }
 
@@ -1818,6 +1818,18 @@ public class HttpUtil {
     public static void post_comment(String post_id, HttpCallback callback) {
         HttpClient.getInstance().get("Community.post_comment", HttpConsts.COMMUNITY)
                 .params("post_id", post_id)
+                .params("uid", "1")
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
+    /**
+     * 评论帖子
+     */
+    public static void CommunityComment(String post_id, String text, HttpCallback callback) {
+        HttpClient.getInstance().get("Community.comment", HttpConsts.COMMUNITY)
+                .params("post_id", post_id)
+                .params("text", text)
                 .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())
                 .execute(callback);

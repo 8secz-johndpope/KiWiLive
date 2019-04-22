@@ -1,8 +1,9 @@
 package com.kiwi.phonelive.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CommunitChlideBeanZhu {
+public class CommunitChlideBeanZhu implements Serializable {
 
     /**
      * id : 1
@@ -108,7 +109,7 @@ public class CommunitChlideBeanZhu {
         this.user_info = user_info;
     }
 
-    public static class RecommendInfoBean {
+    public static class RecommendInfoBean implements Serializable {
         /**
          * video : http://47.254.192.108:18080/jimat/upload/image/201901/12a1157883ae44dcb1118b28f099a4b9.mp4
          * video_img : http://qiniu.kiwiapp.vip/20190325/5c9884edb300a.png
