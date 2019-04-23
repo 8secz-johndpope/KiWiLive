@@ -29,13 +29,16 @@ public class Fgt_DynamicAdapter extends BaseMultiItemQuickAdapter<Fgt_DynamicBea
     protected void convert(BaseViewHolder helper, Fgt_DynamicBean item) {
         switch (helper.getItemViewType()) {
             case Fgt_DynamicBean.Stats1://无图无视频
+
                 helper.setText(R.id.item_img_title, item.getTitle())
                         .setText(R.id.name, item.getUser_nicename());
+
                 Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.img_square_header));
                 break;
             case Fgt_DynamicBean.Stats2://有视频
                 helper.setText(R.id.item_img_title, item.getTitle())
                         .setText(R.id.name, item.getUser_nicename());
+                helper.addOnClickListener(R.id.item_videoImage);
                 Glide.with(context).load(item.getVideo_img()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.item_videoImage));
                 Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.img_square_header));
                 break;

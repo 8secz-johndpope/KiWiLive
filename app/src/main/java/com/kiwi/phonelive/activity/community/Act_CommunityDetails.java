@@ -76,6 +76,7 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
         notice = findViewById(R.id.notice);
         notice.setOnClickListener(this);
         findViewById(R.id.my_Details).setOnClickListener(this);
+        findViewById(R.id.communitydetails_fabu).setOnClickListener(this);
         name = findViewById(R.id.community_name);
         community_desc = findViewById(R.id.community_desc);
         mRefreshLayout = findViewById(R.id.refreshLayout);
@@ -150,23 +151,26 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.my_Details://详情
-                    Intent intent1 = new Intent(Act_CommunityDetails.this, Act_CommunityChlideDetails.class);
-                    intent1.putExtra("cm_id",cm_id);
-                    intent1.putExtra("title", bean.getCommunity_name());
-                    startActivity(intent1);
-                    break;
-                case R.id.notice://公告
-                    if (bean == null) {
-                        return;
-                    }
-                    Intent intent = new Intent(Act_CommunityDetails.this, Act_AnnouncementDetails.class);
-                    intent.putExtra("notice", bean.getNotice());
-                    intent.putExtra("title", bean.getCommunity_name());
-                    startActivity(intent);
-                    break;
-            }
+        switch (v.getId()) {
+            case R.id.my_Details://详情
+                Intent intent1 = new Intent(Act_CommunityDetails.this, Act_CommunityChlideDetails.class);
+                intent1.putExtra("cm_id", cm_id);
+                intent1.putExtra("title", bean.getCommunity_name());
+                startActivity(intent1);
+                break;
+            case R.id.notice://公告
+                if (bean == null) {
+                    return;
+                }
+                Intent intent = new Intent(Act_CommunityDetails.this, Act_AnnouncementDetails.class);
+                intent.putExtra("notice", bean.getNotice());
+                intent.putExtra("title", bean.getCommunity_name());
+                startActivity(intent);
+                break;
+            case R.id.communitydetails_fabu://发布
+                startActivity(new Intent(getApplicationContext(), Act_Publish_Post.class));
+                break;
+        }
 
     }
 

@@ -161,6 +161,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -275,7 +276,6 @@
                     app:riv_corner_radius="@dimen/dip_5"
                     app:riv_mutate_background="true"
                     app:riv_tile_mode="repeat" />
-
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/item_img_lo6_6"
                     android:layout_width="0dp"

@@ -62,7 +62,9 @@
                         android:text="171次浏览"
                         android:textColor="@color/gray1"
                         android:textSize="14sp" />
+
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -89,34 +91,15 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/dip_10"
         android:textColor="#4A4A4A" />
-
-    <com.kiwi.phonelive.views.AntGrideVIew
-        android:id="@+id/gv_DynamicPics"
+    <cn.jzvd.JZVideoPlayerStandard
+        android:id="@+id/videoplayer"
+        android:layout_margin="@dimen/dip_10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dip_10"
-        android:layout_marginTop="@dimen/dip_10"
-        android:layout_marginRight="@dimen/dip_10"
-        android:horizontalSpacing="3dp"
-        android:numColumns="3"
-        android:verticalSpacing="3dp"
-        android:visibility="gone" />
-
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/grid_icon"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_220"
-        android:layout_marginTop="@dimen/dip_10"
-        android:scaleType="centerCrop"
-        app:riv_border_color="#333333"
-        app:riv_corner_radius="@dimen/dip_3"
-        app:riv_mutate_background="true"
-        app:riv_tile_mode="repeat" />
-
+        android:layout_height="200dp"/>
     <LinearLayout
-        android:layout_marginTop="@dimen/dip_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_10"
         android:orientation="vertical"
         android:paddingLeft="@dimen/dip_10">
 

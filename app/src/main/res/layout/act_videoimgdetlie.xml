@@ -1,43 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <RelativeLayout
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:paddingTop="19dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_height="65dp"
+            android:paddingTop="19dp">
 
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:onClick="backClick"
-                android:padding="9dp"
-                android:src="@mipmap/icon_back"
-                android:tint="@color/bg_black" />
-
-            <TextView
-                android:id="@+id/my_notice_title"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/dip_10"
-                android:paddingRight="@dimen/dip_20"
-                android:textColor="@color/bg_black"
-                android:textSize="@dimen/fond_18sp"
-                android:textStyle="bold" />
+                android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:onClick="backClick"
+                    android:padding="9dp"
+                    android:src="@mipmap/icon_back"
+                    android:tint="@color/bg_black" />
+
+                <TextView
+                    android:id="@+id/my_notice_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/dip_10"
+                    android:paddingRight="@dimen/dip_20"
+                    android:textColor="@color/bg_black"
+                    android:textSize="@dimen/fond_18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/video_recylcerview"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/video_recylcerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="@dimen/dip_60"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/videoimg_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dip_10"
+            android:layout_weight="1"
+            android:background="@drawable/bg_commun"
+            android:hint="评论"
+            android:paddingLeft="@dimen/dip_10"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/videoimg_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dip_10"
+            android:layout_marginRight="@dimen/dip_10"
+            android:background="@drawable/bg_commun1"
+            android:paddingLeft="@dimen/dip_10"
+            android:paddingTop="@dimen/dip_5"
+            android:paddingRight="@dimen/dip_10"
+            android:paddingBottom="@dimen/dip_5"
+            android:text="发送"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</RelativeLayout>
+

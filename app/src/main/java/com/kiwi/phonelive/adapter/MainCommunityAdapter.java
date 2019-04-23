@@ -81,6 +81,8 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
         return 0;
     }
 
+    int idextPage = 0;
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -171,71 +173,57 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                 follow_status.setText("+ 关注");
 
             }
-            if (bean.getUser_info() == null) {//没有图片没有视频情况
-                myGridView.setVisibility(View.GONE);
-                item_Image.setVisibility(View.GONE);
-                llImg.setVisibility(View.GONE);
-            } else if (bean.getUser_info() != null && bean.getUser_info().size() == 1) {//一张图片
-                myGridView.setVisibility(View.GONE);
-                item_Image.setVisibility(View.VISIBLE);
-                llImg.setVisibility(View.GONE);
-                item_Image.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
-                        intent.putExtra("cm_id", bean.getCm_id() + "");
-                        intent.putExtra("post_id",bean.getId());
-                        intent.putExtra("bean", (Serializable) bean);
-                        intent.putExtra("status", "img");
-                        mContext.startActivity(intent);
-                    }
-                });
-                ImgLoader.displayAvatar(bean.getUser_info().get(0), item_Image);
-            } else if (bean.getUser_info() != null && bean.getUser_info().size() == 6) {//6张图片
-                llImg.setVisibility(View.VISIBLE);
-                myGridView.setVisibility(View.GONE);
-                item_Image.setVisibility(View.GONE);
-                llImg.setVisibility(View.VISIBLE);
-                llImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (bean.getRecommend_info() != null) {
-                            Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
-                            intent.putExtra("cm_id", bean.getCm_id() + "");
-                            intent.putExtra("post_id",bean.getId());
-                            intent.putExtra("bean", bean);
-                            intent.putExtra("video", "img");
-                            mContext.startActivity(intent);
+            llImg.setVisibility(View.VISIBLE);
+            myGridView.setVisibility(View.GONE);
+            item_Image.setVisibility(View.GONE);
+            llImg.setVisibility(View.VISIBLE);
+            if (bean.getRecommend_info() != null) {
+                for (int i = 0; i < bean.getRecommend_info().size(); i++) {
+                    if (i < 6) {
+                        if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
+                            ImgLoader.displayAvatar(bean.getRecommend_info().get(i).getVideo_img(), img6[i]);
                         } else {
-                            Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
-                            intent.putExtra("cm_id", bean.getCm_id() + "");
-                            intent.putExtra("post_id",bean.getId());
-                            intent.putExtra("bean", bean);
-                            intent.putExtra("status", "img");
-                            mContext.startActivity(intent);
+                            ImgLoader.displayAvatar(bean.getRecommend_info().get(i).getImgs(), img6[i]);
                         }
+                        img6[i].setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                switch (v.getId()) {
+                                    case R.id.item_img_lo6_1:
+                                        idextPage = 0;
+                                        break;
+                                    case R.id.item_img_lo6_2:
+                                        idextPage = 1;
+                                        break;
+                                    case R.id.item_img_lo6_3:
+                                        idextPage = 2;
+                                        break;
+                                    case R.id.item_img_lo6_4:
+                                        idextPage = 3;
+                                        break;
+                                    case R.id.item_img_lo6_5:
+                                        idextPage = 4;
+                                        break;
+                                    case R.id.item_img_lo6_6:
+                                        idextPage = 5;
+                                        break;
+
+                                }
+                                Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
+                                intent.putExtra("cm_id", bean.getCm_id() + "");
+                                intent.putExtra("uid", bean.getRecommend_info().get(idextPage).getUid());
+                                intent.putExtra("post_id", bean.getRecommend_info().get(idextPage).getPost_id());
+                                intent.putExtra("bean", bean);
+                                if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
+                                    intent.putExtra("status", "video");
+                                } else {
+                                    intent.putExtra("status", "img");
+                                }
+                                mContext.startActivity(intent);
+                            }
+                        });
                     }
-                });
-                for (int i = 0; i < bean.getUser_info().size(); i++) {
-                    ImgLoader.displayAvatar(bean.getUser_info().get(i), img6[i]);
                 }
-            } else if (bean.getUser_info().size() > 1) {//其它情况
-                myGridView.setVisibility(View.VISIBLE);
-                myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
-                        intent.putExtra("cm_id", bean.getCm_id() + "");
-                        intent.putExtra("post_id",bean.getId());
-                        intent.putExtra("bean", (Serializable) bean);
-                        intent.putExtra("status", "img");
-                        mContext.startActivity(intent);
-                    }
-                });
-                llImg.setVisibility(View.GONE);
-                item_Image.setVisibility(View.GONE);
-                CommunityGridViewAdapter adapter = new CommunityGridViewAdapter(mContext, bean.getUser_info());
-                myGridView.setAdapter(adapter);
             }
             user_count.setText("关注  " + bean.getUser_count());
             post_count.setText("帖子  " + bean.getUser_count());
@@ -247,41 +235,36 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                 return;
             }
             //设置小头像显示
-            switch (bean.getUser_info().size()) {
-                case 1:
-                    ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
-                    had1.setVisibility(View.VISIBLE);
-                    had2.setVisibility(View.GONE);
-                    had3.setVisibility(View.GONE);
-                    had4.setVisibility(View.GONE);
-                    break;
-                case 2:
-                    ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
-                    ImgLoader.displayAvatar(bean.getUser_info().get(1), had2);
-                    had1.setVisibility(View.VISIBLE);
-                    had2.setVisibility(View.VISIBLE);
-                    had3.setVisibility(View.GONE);
-                    had4.setVisibility(View.GONE);
-                    break;
-                case 3:
-                    ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
-                    ImgLoader.displayAvatar(bean.getUser_info().get(1), had2);
-                    ImgLoader.displayAvatar(bean.getUser_info().get(2), had3);
-                    had1.setVisibility(View.VISIBLE);
-                    had2.setVisibility(View.VISIBLE);
-                    had3.setVisibility(View.VISIBLE);
-                    had4.setVisibility(View.GONE);
-                    break;
-                case 5:
-                    ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
-                    ImgLoader.displayAvatar(bean.getUser_info().get(1), had2);
-                    ImgLoader.displayAvatar(bean.getUser_info().get(2), had3);
-                    ImgLoader.displayAvatar(bean.getUser_info().get(3), had4);
-                    had1.setVisibility(View.VISIBLE);
-                    had2.setVisibility(View.VISIBLE);
-                    had3.setVisibility(View.VISIBLE);
-                    had4.setVisibility(View.VISIBLE);
-                    break;
+            if (bean.getUser_info().size() == 1) {
+                ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
+                had1.setVisibility(View.VISIBLE);
+                had2.setVisibility(View.GONE);
+                had3.setVisibility(View.GONE);
+                had4.setVisibility(View.GONE);
+            } else if (bean.getUser_info().size() == 2) {
+                ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
+                ImgLoader.displayAvatar(bean.getUser_info().get(1), had2);
+                had1.setVisibility(View.VISIBLE);
+                had2.setVisibility(View.VISIBLE);
+                had3.setVisibility(View.GONE);
+                had4.setVisibility(View.GONE);
+            } else if (bean.getUser_info().size() == 3) {
+                ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
+                ImgLoader.displayAvatar(bean.getUser_info().get(1), had2);
+                ImgLoader.displayAvatar(bean.getUser_info().get(2), had3);
+                had1.setVisibility(View.VISIBLE);
+                had2.setVisibility(View.VISIBLE);
+                had3.setVisibility(View.VISIBLE);
+                had4.setVisibility(View.GONE);
+            } else if (bean.getUser_info().size() >= 4) {
+                ImgLoader.displayAvatar(bean.getUser_info().get(0), had1);
+                ImgLoader.displayAvatar(bean.getUser_info().get(1), had2);
+                ImgLoader.displayAvatar(bean.getUser_info().get(2), had3);
+                ImgLoader.displayAvatar(bean.getUser_info().get(3), had4);
+                had1.setVisibility(View.VISIBLE);
+                had2.setVisibility(View.VISIBLE);
+                had3.setVisibility(View.VISIBLE);
+                had4.setVisibility(View.VISIBLE);
             }
             imgll.setOnClickListener(new View.OnClickListener() {
                 @Override

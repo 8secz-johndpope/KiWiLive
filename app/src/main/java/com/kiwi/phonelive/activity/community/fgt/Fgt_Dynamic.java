@@ -1,5 +1,6 @@
 package com.kiwi.phonelive.activity.community.fgt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.support.annotation.NonNull;
@@ -15,9 +16,11 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.activity.community.Act_CommunityDetails;
+import com.kiwi.phonelive.activity.community.Act_VideoImgDetlie;
 import com.kiwi.phonelive.activity.community.adapter.Fgt_DynamicAdapter;
 import com.kiwi.phonelive.activity.community.bean.DynamicBean;
 import com.kiwi.phonelive.activity.community.bean.Fgt_DynamicBean;
@@ -38,7 +41,7 @@ import java.util.List;
 /**
  * 社区动态详情页=》动态子列表
  */
-public class Fgt_Dynamic extends BaseFragment {
+public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItemChildClickListener {
     private String cm_id;
     private RecyclerView myRecyclerview;
 
@@ -125,6 +128,7 @@ public class Fgt_Dynamic extends BaseFragment {
                 }
                 if (adapter == null) {
                     adapter = new Fgt_DynamicAdapter(datas, getContext());
+                    adapter.setOnItemChildClickListener(Fgt_Dynamic.this);
                     myRecyclerview.setAdapter(adapter);
                 } else {
                     adapter.notifyDataSetChanged();
@@ -132,4 +136,24 @@ public class Fgt_Dynamic extends BaseFragment {
             }
         });
     }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        switch (view.getId()) {
+            case R.id.item_videoImage:
+//                Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
+//                intent.putExtra("cm_id", datas.get(position).get.getCm_id() + "");
+//                intent.putExtra("uid", bean.getRecommend_info().get(idextPage).getUid());
+//                intent.putExtra("post_id", bean.getRecommend_info().get(idextPage).getPost_id());
+//                intent.putExtra("bean", bean);
+//                if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
+//                    intent.putExtra("status", "video");
+//                } else {
+//                    intent.putExtra("status", "img");
+//                }
+//                mContext.startActivity(intent);
+                break;
+        }
+    }
+
 }

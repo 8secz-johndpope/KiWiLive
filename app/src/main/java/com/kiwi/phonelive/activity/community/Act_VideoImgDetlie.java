@@ -1,21 +1,28 @@
 package com.kiwi.phonelive.activity.community;
 
+import android.net.Uri;
 import android.os.Build;
+import android.os.Debug;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.activity.AbsActivity;
 import com.kiwi.phonelive.activity.community.adapter.VideoImgDetlieAdapter;
 import com.kiwi.phonelive.activity.community.bean.Post_CommentBean;
 import com.kiwi.phonelive.activity.community.bean.VideoImageDetalieBean;
+import com.kiwi.phonelive.activity.community.bean.VideoImgDetileBean;
 import com.kiwi.phonelive.adapter.CommunityGridViewAdapter;
 import com.kiwi.phonelive.bean.CommunitChlideBeanZhu;
 import com.kiwi.phonelive.http.HttpCallback;
@@ -23,17 +30,21 @@ import com.kiwi.phonelive.http.HttpUtil;
 import com.kiwi.phonelive.utils.ToastUtil;
 import com.kiwi.phonelive.views.AntGrideVIew;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.tencent.rtmp.ui.TXCloudVideoView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.jzvd.JZVideoPlayerStandard;
+
 /**
  * 图片视频详情
  */
-public class Act_VideoImgDetlie extends AbsActivity {
+public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListener {
     private RecyclerView myRecyclerView;
     private CommunitChlideBeanZhu beanZhu;
+    private EditText input;
 
     @Override
     protected int getLayoutId() {
@@ -54,12 +65,16 @@ public class Act_VideoImgDetlie extends AbsActivity {
     private RoundedImageView view_img;
     private AntGrideVIew myGridViw;
     private RoundedImageView haderImage;
-    private TextView name;
+    private TextView name, number, addTime, follow_status, text, title, pinglunNumber;
+    private JZVideoPlayerStandard myVideo;
 
     public void initView() {
+        title = findViewById(R.id.my_notice_title);
+        input = findViewById(R.id.videoimg_input);
         post_id = getIntent().getStringExtra("post_id");
         cm_id = getIntent().getStringExtra("cm_id");
         status = getIntent().getStringExtra("status");
+        findViewById(R.id.videoimg_send).setOnClickListener(this);
         myRecyclerView = findViewById(R.id.video_recylcerview);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new VideoImgDetlieAdapter(getBaseContext());
@@ -67,27 +82,23 @@ public class Act_VideoImgDetlie extends AbsActivity {
         myRecyclerView.setAdapter(adapter);
         beanZhu = (CommunitChlideBeanZhu) getIntent().getSerializableExtra("bean");
         if (status.equals("video")) {//视频
-
-
+            viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videodetlie, null);
+            title.setText("视频详情");
+            myVideo = viewHader.findViewById(R.id.videoplayer);
         } else {//图片
-            viewHader = LayoutInflater.from(this).inflate(R.layout.view_videoimgdetlie, null);
+            title.setText("图片详情");
+            viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videoimgdetlie, null);
             view_img = viewHader.findViewById(R.id.grid_icon);
             myGridViw = viewHader.findViewById(R.id.gv_DynamicPics);
-            if (beanZhu.getUser_info().size() == 1) {
-                view_img.setVisibility(View.VISIBLE);
-                myGridViw.setVisibility(View.GONE);
-                Glide.with(this).load(beanZhu.getUser_info().get(0)).into(view_img);
-            } else {
-                view_img.setVisibility(View.GONE);
-                myGridViw.setVisibility(View.VISIBLE);
-                CommunityGridViewAdapter adapter = new CommunityGridViewAdapter(mContext, beanZhu.getUser_info());
-                myGridViw.setAdapter(adapter);
-            }
         }
         haderImage = viewHader.findViewById(R.id.avatar);
         name = viewHader.findViewById(R.id.community_name);
+        number = viewHader.findViewById(R.id.community_number);
+        addTime = viewHader.findViewById(R.id.community_time);
+        follow_status = viewHader.findViewById(R.id.follow_status);
+        text = viewHader.findViewById(R.id.text);
+        pinglunNumber = viewHader.findViewById(R.id.pinglun);
 
-        adapter.addHeaderView(viewHader);
     }
 
     public void initData() {
@@ -102,7 +113,44 @@ public class Act_VideoImgDetlie extends AbsActivity {
         HttpUtil.post_info(post_id, cm_id, new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
-//                Log.e("aa", "------------onSuccess==" + info[0]);
+                Gson gson = new Gson();
+                VideoImgDetileBean bean = gson.fromJson(info[0], VideoImgDetileBean.class);
+                if (status.equals("video")) {//视频
+                    myVideo.setUp(bean.getVideo()
+                            , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "");
+                    Glide.with(getBaseContext()).load(bean.getVideo_img()).into(myVideo.thumbImageView);
+                } else {//图片、
+                    if (bean.getImgs() == null) {
+                        view_img.setVisibility(View.GONE);
+                        myGridViw.setVisibility(View.GONE);
+                        return;
+                    }
+                    if (bean.getImgs().size() == 1) {
+                        view_img.setVisibility(View.VISIBLE);
+                        myGridViw.setVisibility(View.GONE);
+                        Glide.with(getBaseContext()).load(bean.getImgs().get(0)).into(view_img);
+                    } else {
+                        view_img.setVisibility(View.GONE);
+                        myGridViw.setVisibility(View.VISIBLE);
+                        CommunityGridViewAdapter adapter = new CommunityGridViewAdapter(mContext, bean.getImgs());
+                        myGridViw.setAdapter(adapter);
+                    }
+                }
+                Glide.with(getBaseContext()).load(bean.getAvatar_thumb()).into(haderImage);
+                name.setText(bean.getUser_nicename());
+                number.setText(bean.getVisit_num() + "次浏览");
+                if (bean.getText() == null) {
+                    text.setText("");
+                    text.setVisibility(View.GONE);
+                } else {
+                    text.setText(bean.getText() + "");
+                }
+                if (bean.getFollow_status() == 1) {
+                    follow_status.setText("已关注");
+                } else {
+                    follow_status.setText("+ 关注");
+                }
+                adapter.addHeaderView(viewHader);
             }
         });
     }
@@ -125,12 +173,15 @@ public class Act_VideoImgDetlie extends AbsActivity {
                 for (int i = 0; i < data.size(); i++) {
                     datas.add(data.get(i));
                 }
+                pinglunNumber.setText(data.size() + "");
                 adapter.notifyDataSetChanged();
             }
         });
     }
+
     /**
      * 评论当前列表
+     *
      * @param text
      */
     public void CommunityComment(String text) {
@@ -138,7 +189,26 @@ public class Act_VideoImgDetlie extends AbsActivity {
         HttpUtil.CommunityComment(post_id, text, new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
+                if (msg.equals("添加成功！")) {
+                    Toast.makeText(getApplicationContext(), "评论成功！", Toast.LENGTH_SHORT);
+                    input.setText("");
+                    post_comment();
+                    return;
+                }
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.videoimg_send://发送
+                if (TextUtils.isDigitsOnly(input.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "您还没有输入要评论的信息！", Toast.LENGTH_SHORT);
+                    return;
+                }
+                CommunityComment(input.getText().toString());
+                break;
+        }
     }
 }
