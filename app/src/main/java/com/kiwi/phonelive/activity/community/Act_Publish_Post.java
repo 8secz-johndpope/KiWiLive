@@ -1,24 +1,58 @@
 package com.kiwi.phonelive.activity.community;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Debug;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.kiwi.phonelive.AppConfig;
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.activity.AbsActivity;
-import com.kiwi.phonelive.activity.community.adapter.GridImageAdapter;
-import com.kiwi.phonelive.views.FullyGridLayoutManager;
+import com.kiwi.phonelive.activity.VideoRecordActivity;
+import com.kiwi.phonelive.activity.community.adapter.BusinessShopGridAdapter;
+import com.kiwi.phonelive.activity.community.dialog.Dlg_Photograph;
+import com.kiwi.phonelive.bean.UserBean;
+import com.kiwi.phonelive.glide.ImgLoader;
+import com.kiwi.phonelive.http.HttpCallback;
+import com.kiwi.phonelive.http.HttpUtil;
+import com.kiwi.phonelive.interfaces.ImageResultCallback;
+import com.kiwi.phonelive.utils.ProcessImageUtil;
+import com.kiwi.phonelive.utils.ProcessResultUtil;
+import com.kiwi.phonelive.utils.ToastUtil;
+import com.kiwi.phonelive.views.MyGridView;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 社区详情。。列表发布
  */
-public class Act_Publish_Post extends AbsActivity implements View.OnClickListener {
+public class Act_Publish_Post extends AbsActivity implements View.OnClickListener, AdapterView.OnItemClickListener, Dlg_Photograph.OnClick, BusinessShopGridAdapter.onBackImgShut {
     @Override
     protected int getLayoutId() {
         return R.layout.act_publish_post;
@@ -35,95 +69,77 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
 
     private TextView title[] = new TextView[3];
     private LinearLayout llVideo;
-    private EditText llText;
-    private RecyclerView llRecyclerView;
+    private EditText llText, tvTitle;
+    private MyGridView myGridView;
+    private String cm_id;
+
     public void initView() {
         findViewById(R.id.publish_ll3).setOnClickListener(this);
         findViewById(R.id.publish_ll2).setOnClickListener(this);
         findViewById(R.id.publish_ll1).setOnClickListener(this);
+        findViewById(R.id.my_fabu).setOnClickListener(this);
+        cm_id = getIntent().getStringExtra("cm_id");
+        tvTitle = findViewById(R.id.publish_title);
         title[0] = findViewById(R.id.publish_tv1);
         title[1] = findViewById(R.id.publish_tv2);
         title[2] = findViewById(R.id.publish_tv3);
         llVideo = findViewById(R.id.ll_video);
+        llVideo.setOnClickListener(this);
         llText = findViewById(R.id.ed_text);
-        llRecyclerView = findViewById(R.id.recycler_issue_column);
+        myGridView = findViewById(R.id.recycler_issue_column);
 
     }
-    GridImageAdapter mGridImageAdapter;
-//    private List<LocalMedia> selectList = new ArrayList<>();
+
+    List<File> Carmer_file;
+    Dlg_Photograph photo;
+    private BusinessShopGridAdapter adapter;
+    private ProcessImageUtil mImageUtil;
+    private ProcessResultUtil mProcessResultUtil;
+
     public void initData() {
-//        themeId = R.style.picture_default_style;
-        swche(0);
-        FullyGridLayoutManager manager = new FullyGridLayoutManager(Act_Publish_Post.this, 3, GridLayoutManager.VERTICAL, false);
-        llRecyclerView.setLayoutManager(manager);
-//        mGridImageAdapter = new GridImageAdapter(Act_Publish_Post.this, onAddPicClickListener);
-//        llRecyclerView.setAdapter(mGridImageAdapter);
-//        mGridImageAdapter.setOnItemClickListener(new GridImageAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position, View v) {
-//                if (selectList.size() > 0) {
-//                    LocalMedia media = selectList.get(position);
-//                    String pictureType = media.getPictureType();
-//                    int mediaType = PictureMimeType.pictureToVideo(pictureType);
-//                    switch (mediaType) {
-//                        case 1:
-//                            // 预览图片 可自定长按保存路径
-//                            PictureSelector.create(Act_Publish_Post.this).themeStyle(themeId).openExternalPreview(position, selectList);
-//                            break;
-//                        case 2:
-//                            // 预览视频
-//                            PictureSelector.create(Act_Publish_Post.this).externalPictureVideo(media.getPath());
-//                            break;
-//                        case 3:
-//                            // 预览音频
-//                            PictureSelector.create(Act_Publish_Post.this).externalPictureAudio(media.getPath());
-//                            break;
-//                    }
-//                }
-//            }
-//        });
-    }
-//    private int chooseMode = PictureMimeType.ofImage();
-    private int maxSelectNum = 9;
-    private int themeId;
-    private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
-        @Override
-        public void onAddPicClick() {
-//            PictureSelector.create(Act_Publish_Post.this)
-//                    .openGallery(chooseMode)
-//                    .maxSelectNum(maxSelectNum)// 最大图片选择数量
-//                    .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
-//                    .minSelectNum(1)// 最小选择数量
-//                    .imageSpanCount(4)// 每行显示个数
-//                    .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
-//                    .selectionMode(PictureConfig.MULTIPLE)
-//                    .isCamera(true)
-//                    .imageFormat(PictureMimeType.PNG)// 拍照保存图片格式后缀,默认jpeg
-//                    .synOrAsy(true)//同步true或异步false 压缩 默认同步
-//                    .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
-//                    .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
-//                    .minimumCompressSize(100)// 小于100kb的图片不压缩
-//                    .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
+        mProcessResultUtil = new ProcessResultUtil(this);
+        Carmer_file = new ArrayList<>();
+        photo = new Dlg_Photograph(this, Act_Publish_Post.this);
+        adapter = new BusinessShopGridAdapter(this, this);
+        for (int i = 0; i < 1; i++) {
+            File file1 = new File("");
+            Carmer_file.add(file1);
         }
-    };
+        adapter.setChannel_info(Carmer_file);
+        myGridView.setAdapter(adapter);
+        myGridView.setOnItemClickListener(this);
+        mImageUtil = new ProcessImageUtil(this);
+        mImageUtil.setImageResultCallback(new ImageResultCallback() {
+            @Override
+            public void beforeCamera() {
+
+            }
+
+            @Override
+            public void onSuccess(File file) {
+                if (file != null) {
+                    Carmer_file.add(0, file);
+                    if (Carmer_file.size() == 9) {
+                        Carmer_file.remove(Carmer_file.size() - 1);
+                    }
+                    adapter.setChannel_info(Carmer_file);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+        swche(0);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK) {
-//            switch (requestCode) {
-//                case PictureConfig.CHOOSE_REQUEST:
-//                    // 图片选择结果回调
-//                    List<LocalMedia> selectList1 = PictureSelector.obtainMultipleResult(data);
-//                    for (LocalMedia media : selectList1) {
-//                        Log.i("图片-----》", media.getPath());
-//                        selectList.add(media);
-//                    }
-//                    mGridImageAdapter.setList(selectList);
-//                    mGridImageAdapter.notifyDataSetChanged();
-//                    break;
-//            }
-//        }
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -136,32 +152,151 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
             case R.id.publish_ll3://点击短文
                 swche(2);
                 break;
+            case R.id.my_fabu:
+                if (TextUtils.isEmpty(tvTitle.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "请输入您要发布的标题！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                switch (page) {
+                    case 0:
+
+                        break;
+                    case 1:
+                        postFileImg();
+                        break;
+                    case 2:
+                        postText();
+                        break;
+                }
+                break;
+            case R.id.ll_video://视频
+                mProcessResultUtil.requestPermissions(new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.RECORD_AUDIO
+                }, mStartVideoRunnable);
+                break;
         }
     }
 
+    private Runnable mStartVideoRunnable = new Runnable() {
+        @Override
+        public void run() {
+            startActivity(new Intent(mContext, VideoRecordActivity.class));
+        }
+    };
     private int page = 0;
 
     public void swche(int indext) {
         title[page].setSelected(false);
         title[indext].setSelected(true);
         page = indext;
-
-        switch (indext){
+        switch (indext) {
             case 0:
                 llVideo.setVisibility(View.VISIBLE);
                 llText.setVisibility(View.GONE);
-                llRecyclerView.setVisibility(View.GONE);
+                myGridView.setVisibility(View.GONE);
                 break;
             case 1:
                 llVideo.setVisibility(View.GONE);
                 llText.setVisibility(View.GONE);
-                llRecyclerView.setVisibility(View.VISIBLE);
+                myGridView.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 llVideo.setVisibility(View.GONE);
                 llText.setVisibility(View.VISIBLE);
-                llRecyclerView.setVisibility(View.GONE);
+                myGridView.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (Carmer_file.get(Carmer_file.size() - 1).getPath().equals("")) {
+            photo.show();
+        }
+    }
+
+    @Override
+    public void onItem(int p) {
+        switch (p) {
+            case 1://拍照
+                mImageUtil.getImageByCamera();
+                photo.dismiss();
+                break;
+            case 2://从手机相册选择
+                photo.dismiss();
+                mImageUtil.getImageByAlumb();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackImgShut(int position) {
+        Carmer_file.remove(position);
+        if (Carmer_file.get(Carmer_file.size() - 1).getPath().equals("")) {
+
+        } else {
+            if (Carmer_file.size() < 8) {
+                File file1 = new File("");
+                Carmer_file.add(file1);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 上传图片加标题
+     */
+    public void postFileImg() {
+        if (Carmer_file.get(Carmer_file.size() - 1).getPath().equals("")) {
+            Carmer_file.remove(Carmer_file.size() - 1);
+        }
+        HttpUtil.updateImgText(Carmer_file, cm_id, tvTitle.getText().toString(), new HttpCallback() {
+            @Override
+            public void onSuccess(int code, String msg, String[] info) {
+                if (code==0) {
+                    Toast.makeText(getApplicationContext(), "发布成功！", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 上传视频加标题
+     */
+    public void postFileVideo() {
+//        HttpUtil.updateVideoText(Carmer_file, cm_id, tvTitle.getText().toString(), new HttpCallback() {
+//            @Override
+//            public void onSuccess(int code, String msg, String[] info) {
+//                if (msg.equals("添加成功！")) {
+//                    finish();
+//                }
+//            }
+//        });
+
+    }
+
+    /**
+     * 上传文字
+     */
+    public void postText() {
+        if (TextUtils.isEmpty(llText.getText().toString())) {
+            Toast.makeText(getApplicationContext(), "请输入您需要发布的内容！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        HttpUtil.updateText(cm_id, tvTitle.getText().toString(), llText.getText().toString(), new HttpCallback() {
+            @Override
+            public void onSuccess(int code, String msg, String[] info) {
+                if (code == 0) {
+                    Toast.makeText(getApplicationContext(), "发布成功！", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        });
+
     }
 }

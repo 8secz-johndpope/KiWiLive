@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -574,6 +575,7 @@ public class VideoRecordActivity extends AbsActivity implements
             mVideoPath = data.getStringExtra(Constants.VIDEO_PATH);
             mDuration = data.getLongExtra(Constants.VIDEO_DURATION, 0);
             mFromRecord = false;
+            Log.e("aa","---------"+mVideoPath);
             startPreProcess();
         }
     }

@@ -41,7 +41,7 @@ public class VideoChooseActivity extends AbsActivity implements OnItemClickListe
         setTitle(WordUtil.getString(R.string.video_local));
         mMaxDuration = getIntent().getLongExtra(Constants.VIDEO_DURATION, 15000);
         mNoData = findViewById(R.id.no_data);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false));
         ItemDecoration decoration = new ItemDecoration(mContext, 0x00000000, 1, 1);

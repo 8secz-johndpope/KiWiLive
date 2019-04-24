@@ -4,12 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <cn.jzvd.JZVideoPlayerStandard
+            android:id="@+id/videoplayer"
+            android:layout_width="match_parent"
+            android:layout_height="240dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:paddingTop="19dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:onClick="backClick"
+                    android:padding="9dp"
+                    android:src="@mipmap/icon_back"
+                    android:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/my_notice_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/dip_10"
+                    android:paddingRight="@dimen/dip_20"
+                    android:textColor="@color/bg_black"
+                    android:textSize="@dimen/fond_18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/dip_10"
-        android:paddingTop="@dimen/dip_20"
+        android:paddingTop="@dimen/dip_10"
         android:paddingRight="@dimen/dip_10">
 
         <LinearLayout
@@ -91,11 +133,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/dip_10"
         android:textColor="#4A4A4A" />
-    <cn.jzvd.JZVideoPlayerStandard
-        android:id="@+id/videoplayer"
-        android:layout_margin="@dimen/dip_10"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -90,41 +90,36 @@ public class Act_CommunityChlideDetails extends AbsActivity implements View.OnCl
                     follow_status.setText("+ 关注");
                 }
                 //设置小头像显示
-                switch (bean.getActive_users().size()) {
-                    case 1:
-                        ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
-                        had1.setVisibility(View.VISIBLE);
-                        had2.setVisibility(View.GONE);
-                        had3.setVisibility(View.GONE);
-                        had4.setVisibility(View.GONE);
-                        break;
-                    case 2:
-                        ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
-                        ImgLoader.displayAvatar(bean.getActive_users().get(1).getAvatar_thumb(), had2);
-                        had1.setVisibility(View.VISIBLE);
-                        had2.setVisibility(View.VISIBLE);
-                        had3.setVisibility(View.GONE);
-                        had4.setVisibility(View.GONE);
-                        break;
-                    case 3:
-                        ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
-                        ImgLoader.displayAvatar(bean.getActive_users().get(1).getAvatar_thumb(), had2);
-                        ImgLoader.displayAvatar(bean.getActive_users().get(2).getAvatar_thumb(), had3);
-                        had1.setVisibility(View.VISIBLE);
-                        had2.setVisibility(View.VISIBLE);
-                        had3.setVisibility(View.VISIBLE);
-                        had4.setVisibility(View.GONE);
-                        break;
-                    case 5:
-                        ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
-                        ImgLoader.displayAvatar(bean.getActive_users().get(1).getAvatar_thumb(), had2);
-                        ImgLoader.displayAvatar(bean.getActive_users().get(2).getAvatar_thumb(), had3);
-                        ImgLoader.displayAvatar(bean.getActive_users().get(3).getAvatar_thumb(), had4);
-                        had1.setVisibility(View.VISIBLE);
-                        had2.setVisibility(View.VISIBLE);
-                        had3.setVisibility(View.VISIBLE);
-                        had4.setVisibility(View.VISIBLE);
-                        break;
+                if (bean.getActive_users().size() == 1) {
+                    ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
+                    had1.setVisibility(View.VISIBLE);
+                    had2.setVisibility(View.GONE);
+                    had3.setVisibility(View.GONE);
+                    had4.setVisibility(View.GONE);
+                } else if (bean.getActive_users().size() == 2) {
+                    ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
+                    ImgLoader.displayAvatar(bean.getActive_users().get(1).getAvatar_thumb(), had2);
+                    had1.setVisibility(View.VISIBLE);
+                    had2.setVisibility(View.VISIBLE);
+                    had3.setVisibility(View.GONE);
+                    had4.setVisibility(View.GONE);
+                } else if (bean.getActive_users().size() == 3) {
+                    ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
+                    ImgLoader.displayAvatar(bean.getActive_users().get(1).getAvatar_thumb(), had2);
+                    ImgLoader.displayAvatar(bean.getActive_users().get(2).getAvatar_thumb(), had3);
+                    had1.setVisibility(View.VISIBLE);
+                    had2.setVisibility(View.VISIBLE);
+                    had3.setVisibility(View.VISIBLE);
+                    had4.setVisibility(View.GONE);
+                } else if (bean.getActive_users().size() > 4) {
+                    ImgLoader.displayAvatar(bean.getActive_users().get(0).getAvatar_thumb(), had1);
+                    ImgLoader.displayAvatar(bean.getActive_users().get(1).getAvatar_thumb(), had2);
+                    ImgLoader.displayAvatar(bean.getActive_users().get(2).getAvatar_thumb(), had3);
+                    ImgLoader.displayAvatar(bean.getActive_users().get(3).getAvatar_thumb(), had4);
+                    had1.setVisibility(View.VISIBLE);
+                    had2.setVisibility(View.VISIBLE);
+                    had3.setVisibility(View.VISIBLE);
+                    had4.setVisibility(View.VISIBLE);
                 }
 
 
@@ -168,18 +163,18 @@ public class Act_CommunityChlideDetails extends AbsActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.haderImagell://跳转
-                    Intent intent1 = new Intent(Act_CommunityChlideDetails.this, Act_ActiveUsers.class);
-                    intent1.putExtra("cm_id",cm_id);
-                    intent1.putExtra("title", bean.getCommunity_name());
-                    startActivity(intent1);
-                    break;
-                case R.id.follow_status://关注
-                    setCircle_follow();
-                    break;
+        switch (v.getId()) {
+            case R.id.haderImagell://跳转
+                Intent intent1 = new Intent(Act_CommunityChlideDetails.this, Act_ActiveUsers.class);
+                intent1.putExtra("cm_id", cm_id);
+                intent1.putExtra("title", bean.getCommunity_name());
+                startActivity(intent1);
+                break;
+            case R.id.follow_status://关注
+                setCircle_follow();
+                break;
 
 
-            }
+        }
     }
 }

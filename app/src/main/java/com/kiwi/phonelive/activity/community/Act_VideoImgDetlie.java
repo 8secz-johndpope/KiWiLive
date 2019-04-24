@@ -13,7 +13,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -43,7 +42,6 @@ import cn.jzvd.JZVideoPlayerStandard;
  */
 public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListener {
     private RecyclerView myRecyclerView;
-    private CommunitChlideBeanZhu beanZhu;
     private EditText input;
 
     @Override
@@ -69,7 +67,6 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
     private JZVideoPlayerStandard myVideo;
 
     public void initView() {
-        title = findViewById(R.id.my_notice_title);
         input = findViewById(R.id.videoimg_input);
         post_id = getIntent().getStringExtra("post_id");
         cm_id = getIntent().getStringExtra("cm_id");
@@ -80,14 +77,15 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
         adapter = new VideoImgDetlieAdapter(getBaseContext());
         adapter.setNewData(datas);
         myRecyclerView.setAdapter(adapter);
-        beanZhu = (CommunitChlideBeanZhu) getIntent().getSerializableExtra("bean");
+
         if (status.equals("video")) {//视频
             viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videodetlie, null);
-            title.setText("视频详情");
+            title = viewHader.findViewById(R.id.my_notice_title);
             myVideo = viewHader.findViewById(R.id.videoplayer);
         } else {//图片
-            title.setText("图片详情");
             viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videoimgdetlie, null);
+            title = viewHader.findViewById(R.id.my_notice_title);
+            title.setText("图片详情");
             view_img = viewHader.findViewById(R.id.grid_icon);
             myGridViw = viewHader.findViewById(R.id.gv_DynamicPics);
         }

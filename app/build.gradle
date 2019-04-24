@@ -42,6 +42,7 @@ android {
 }
 
 repositories {
+    maven { url "https://jitpack.io" }
     flatDir {
         dirs 'libs','../libs'
     }
@@ -122,8 +123,4 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-20'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     compile 'cn.jzvd:jiaozivideoplayer:6.2.9'
-//    compile ('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'){
-//        exclude group: 'com.github.bumptech.glide'
-//        exclude group: 'jp.wasabeef:glide-transformations'
-//    }
 }

@@ -161,9 +161,9 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/item_Image"
@@ -203,18 +203,38 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/item_img_lo6_1"
+                <RelativeLayout
                     android:layout_width="0dip"
-
                     android:layout_height="@dimen/dip_230"
                     android:layout_marginRight="@dimen/dip_5"
-                    android:layout_weight="2"
-                    android:scaleType="centerCrop"
-                    app:riv_border_color="#333333"
-                    app:riv_corner_radius="@dimen/dip_5"
-                    app:riv_mutate_background="true"
-                    app:riv_tile_mode="repeat" />
+                    android:layout_weight="2">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/item_img_lo6_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:scaleType="centerCrop"
+                        app:riv_border_color="#333333"
+                        app:riv_corner_radius="@dimen/dip_5"
+                        app:riv_mutate_background="true"
+                        app:riv_tile_mode="repeat" />
+
+                    <TextView
+                        android:id="@+id/item_img_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/bg_communit"
+                        android:paddingLeft="@dimen/dip_5"
+                        android:paddingTop="@dimen/dip_2"
+                        android:paddingRight="@dimen/dip_5"
+                        android:paddingBottom="@dimen/dip_2"
+                        android:text="视频"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/fond_14sp" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="0dip"
@@ -222,28 +242,68 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/item_img_lo6_2"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dip"
                         android:layout_marginBottom="@dimen/dip_3"
-                        android:layout_weight="1"
-                        android:scaleType="centerCrop"
-                        app:riv_border_color="#333333"
-                        app:riv_corner_radius="@dimen/dip_5"
-                        app:riv_mutate_background="true"
-                        app:riv_tile_mode="repeat" />
+                        android:layout_weight="1">
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/item_img_lo6_3"
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/item_img_lo6_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:riv_border_color="#333333"
+                            app:riv_corner_radius="@dimen/dip_5"
+                            app:riv_mutate_background="true"
+                            app:riv_tile_mode="repeat" />
+
+                        <TextView
+                            android:id="@+id/item_img_tv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/bg_communit"
+                            android:paddingLeft="@dimen/dip_5"
+                            android:paddingTop="@dimen/dip_2"
+                            android:paddingRight="@dimen/dip_5"
+                            android:paddingBottom="@dimen/dip_2"
+                            android:text="视频"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/fond_14sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dip"
-                        android:layout_weight="1"
-                        android:scaleType="centerCrop"
-                        app:riv_border_color="#333333"
-                        app:riv_corner_radius="@dimen/dip_5"
-                        app:riv_mutate_background="true"
-                        app:riv_tile_mode="repeat" />
+                        android:layout_weight="1">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/item_img_lo6_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:riv_border_color="#333333"
+                            app:riv_corner_radius="@dimen/dip_5"
+                            app:riv_mutate_background="true"
+                            app:riv_tile_mode="repeat" />
+
+                        <TextView
+                            android:id="@+id/item_img_tv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/bg_communit"
+                            android:paddingLeft="@dimen/dip_5"
+                            android:paddingTop="@dimen/dip_2"
+                            android:paddingRight="@dimen/dip_5"
+                            android:paddingBottom="@dimen/dip_2"
+                            android:text="视频"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/fond_14sp" />
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -253,39 +313,100 @@
                 android:layout_marginTop="@dimen/dip_5"
                 android:orientation="horizontal">
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/item_img_lo6_4"
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingRight="@dimen/dip_5"
-                    android:scaleType="fitXY"
-                    app:riv_border_color="#333333"
-                    app:riv_corner_radius="@dimen/dip_5"
-                    app:riv_mutate_background="true"
-                    app:riv_tile_mode="repeat" />
+                    android:paddingRight="@dimen/dip_5">
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/item_img_lo6_5"
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/item_img_lo6_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        app:riv_border_color="#333333"
+                        app:riv_corner_radius="@dimen/dip_5"
+                        app:riv_mutate_background="true"
+                        app:riv_tile_mode="repeat" />
+
+                    <TextView
+                        android:id="@+id/item_img_tv4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/bg_communit"
+                        android:paddingLeft="@dimen/dip_5"
+                        android:paddingTop="@dimen/dip_2"
+                        android:paddingRight="@dimen/dip_5"
+                        android:paddingBottom="@dimen/dip_2"
+                        android:text="视频"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/fond_14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingRight="@dimen/dip_5"
-                    android:scaleType="fitXY"
-                    app:riv_border_color="#333333"
-                    app:riv_corner_radius="@dimen/dip_5"
-                    app:riv_mutate_background="true"
-                    app:riv_tile_mode="repeat" />
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/item_img_lo6_6"
+                    android:paddingRight="@dimen/dip_5">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/item_img_lo6_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        app:riv_border_color="#333333"
+                        app:riv_corner_radius="@dimen/dip_5"
+                        app:riv_mutate_background="true"
+                        app:riv_tile_mode="repeat" />
+
+                    <TextView
+                        android:id="@+id/item_img_tv5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/bg_communit"
+                        android:paddingLeft="@dimen/dip_5"
+                        android:paddingTop="@dimen/dip_2"
+                        android:paddingRight="@dimen/dip_5"
+                        android:paddingBottom="@dimen/dip_2"
+                        android:text="视频"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/fond_14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    app:riv_border_color="#333333"
-                    app:riv_corner_radius="@dimen/dip_5"
-                    app:riv_mutate_background="true"
-                    app:riv_tile_mode="repeat" />
+                    android:layout_weight="1">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/item_img_lo6_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        app:riv_border_color="#333333"
+                        app:riv_corner_radius="@dimen/dip_5"
+                        app:riv_mutate_background="true"
+                        app:riv_tile_mode="repeat" />
+
+                    <TextView
+                        android:id="@+id/item_img_tv6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/bg_communit"
+                        android:paddingLeft="@dimen/dip_5"
+                        android:paddingTop="@dimen/dip_2"
+                        android:paddingRight="@dimen/dip_5"
+                        android:paddingBottom="@dimen/dip_2"
+                        android:text="视频"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/fond_14sp" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 

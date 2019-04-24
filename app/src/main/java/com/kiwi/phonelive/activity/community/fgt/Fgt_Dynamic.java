@@ -142,11 +142,10 @@ public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItem
         switch (view.getId()) {
             case R.id.item_videoImage:
 //                Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
-//                intent.putExtra("cm_id", datas.get(position).get.getCm_id() + "");
-//                intent.putExtra("uid", bean.getRecommend_info().get(idextPage).getUid());
-//                intent.putExtra("post_id", bean.getRecommend_info().get(idextPage).getPost_id());
-//                intent.putExtra("bean", bean);
-//                if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
+//                intent.putExtra("cm_id", cm_id+ "");
+//                intent.putExtra("uid", datas.get(position).getId().getUid());
+//                intent.putExtra("post_id",datas.get(position).getPost_id());
+//                if (datas.get(position).getVideo_img() != null) {
 //                    intent.putExtra("status", "video");
 //                } else {
 //                    intent.putExtra("status", "img");

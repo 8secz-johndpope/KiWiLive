@@ -33,27 +33,27 @@ public class Fgt_DynamicAdapter extends BaseMultiItemQuickAdapter<Fgt_DynamicBea
                 helper.setText(R.id.item_img_title, item.getTitle())
                         .setText(R.id.name, item.getUser_nicename());
 
-                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.img_square_header));
+                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).fitCenter().into((RoundedImageView) helper.getView(R.id.img_square_header));
                 break;
             case Fgt_DynamicBean.Stats2://有视频
                 helper.setText(R.id.item_img_title, item.getTitle())
                         .setText(R.id.name, item.getUser_nicename());
                 helper.addOnClickListener(R.id.item_videoImage);
-                Glide.with(context).load(item.getVideo_img()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.item_videoImage));
-                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.img_square_header));
+                Glide.with(context).load(item.getVideo_img()).placeholder(R.mipmap.bg_test).fitCenter().into((RoundedImageView) helper.getView(R.id.item_videoImage));
+                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).fitCenter().into((RoundedImageView) helper.getView(R.id.img_square_header));
                 break;
             case Fgt_DynamicBean.Stats3://1图片
                 helper.setText(R.id.item_img_title, item.getTitle())
                         .setText(R.id.name, item.getUser_nicename());
                 if (item.getImgs() != null) {
-                    Glide.with(context).load(item.getImgs().get(0)).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.item_videoImage));
+                    Glide.with(context).load(item.getImgs().get(0)).placeholder(R.mipmap.bg_test).fitCenter().into((RoundedImageView) helper.getView(R.id.item_videoImage));
                 }
-                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.img_square_header));
+                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).fitCenter().into((RoundedImageView) helper.getView(R.id.img_square_header));
                 break;
             case Fgt_DynamicBean.Stats4://多图片
                 helper.setText(R.id.item_img_title, item.getTitle())
                         .setText(R.id.name, item.getUser_nicename());
-                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).into((RoundedImageView) helper.getView(R.id.img_square_header));
+                Glide.with(context).load(item.getAvatar_thumb()).placeholder(R.mipmap.bg_test).fitCenter().into((RoundedImageView) helper.getView(R.id.img_square_header));
                 if (item.getImgs() != null) {
                     AntGrideVIew grideVIew = helper.getView(R.id.gv_DynamicPics);
                     Fgt_DynamicChlideAdapter adapter = new Fgt_DynamicChlideAdapter(context, item.getImgs());

@@ -46,7 +46,7 @@ public class Fgt_DynamicChlideAdapter extends BaseAdapter {
         } else {
             viewTag = (ItemViewTag) convertView.getTag();
         }
-        Glide.with(mContext).load(mNameList.get(position)).error(R.mipmap.icon_video_home_bottom).placeholder(R.mipmap.icon_video_home_bottom).into(viewTag.mIcon);
+        Glide.with(mContext).load(mNameList.get(position)).fitCenter().error(R.mipmap.icon_video_home_bottom).placeholder(R.mipmap.icon_video_home_bottom).into(viewTag.mIcon);
         return convertView;
     }
 

@@ -102,6 +102,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
         private RoundedImageView[] img6 = new RoundedImageView[7];
         private Banner banner;
         private RelativeLayout imgll;
+        private TextView titleStatus[] = new TextView[6];
 
         public Vh(View itemView) {
             super(itemView);
@@ -128,7 +129,12 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
             img6[3] = itemView.findViewById(R.id.item_img_lo6_4);
             img6[4] = itemView.findViewById(R.id.item_img_lo6_5);
             img6[5] = itemView.findViewById(R.id.item_img_lo6_6);
-
+            titleStatus[0] = itemView.findViewById(R.id.item_img_tv1);
+            titleStatus[1] = itemView.findViewById(R.id.item_img_tv2);
+            titleStatus[2] = itemView.findViewById(R.id.item_img_tv3);
+            titleStatus[3] = itemView.findViewById(R.id.item_img_tv4);
+            titleStatus[4] = itemView.findViewById(R.id.item_img_tv5);
+            titleStatus[5] = itemView.findViewById(R.id.item_img_tv6);
         }
 
         List<String> image = new ArrayList<>();
@@ -177,6 +183,9 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
             myGridView.setVisibility(View.GONE);
             item_Image.setVisibility(View.GONE);
             llImg.setVisibility(View.VISIBLE);
+            for (int i = 0; i < titleStatus.length; i++) {
+                titleStatus[i].setVisibility(View.GONE);
+            }
             if (bean.getRecommend_info() != null) {
                 for (int i = 0; i < bean.getRecommend_info().size(); i++) {
                     if (i < 6) {
@@ -213,7 +222,6 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                                 intent.putExtra("cm_id", bean.getCm_id() + "");
                                 intent.putExtra("uid", bean.getRecommend_info().get(idextPage).getUid());
                                 intent.putExtra("post_id", bean.getRecommend_info().get(idextPage).getPost_id());
-                                intent.putExtra("bean", bean);
                                 if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
                                     intent.putExtra("status", "video");
                                 } else {
@@ -222,6 +230,12 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                                 mContext.startActivity(intent);
                             }
                         });
+                        titleStatus[i].setVisibility(View.VISIBLE);
+                        if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
+                            titleStatus[i].setText("视频");
+                        } else {
+                            titleStatus[i].setText("图片");
+                        }
                     }
                 }
             }

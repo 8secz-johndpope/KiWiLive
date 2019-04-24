@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
 import com.kiwi.phonelive.AppConfig;
@@ -1832,6 +1833,52 @@ public class HttpUtil {
                 .params("text", text)
                 .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
+    /**
+     * 上传头像，用post
+     */
+    public static void updateImgText(List<File> files, String cm_id, String title, HttpCallback callback) {
+        HttpParams params = new HttpParams();
+        for (int i = 0; i < files.size(); i++) {
+            params.put("file[" + i + "]", files.get(i));
+        }
+        HttpClient.getInstance().post("Community.add_post_img", HttpConsts.UPDATE_AVATAR)
+                .isMultipart(true)
+                .params(params)
+                .params("title", title)
+                .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .execute(callback);
+    }
+
+    /**
+     * 上传视频，用post
+     */
+    public static void updateVideoText(String cm_id, String title, String file, String file_img, HttpCallback callback) {
+        HttpClient.getInstance().post("Community.add_post_video", HttpConsts.UPDATE_AVATAR)
+                .isMultipart(true)
+                .params("title", title)
+                .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("token", AppConfig.getInstance().getToken())
+                .params("file", file)
+                .params("file_img", file_img)
+                .execute(callback);
+    }
+    /**
+     * 上传Text
+     */
+    public static void updateText(String cm_id, String title, String text,  HttpCallback callback) {
+        HttpClient.getInstance().post("Community.add_post_text", HttpConsts.UPDATE_AVATAR)
+                .isMultipart(true)
+                .params("token", AppConfig.getInstance().getToken())
+                .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
+                .params("text", text)
+                .params("title", title)
                 .execute(callback);
     }
 }

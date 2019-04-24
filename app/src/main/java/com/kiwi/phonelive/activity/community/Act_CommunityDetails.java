@@ -168,7 +168,9 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.communitydetails_fabu://发布
-                startActivity(new Intent(getApplicationContext(), Act_Publish_Post.class));
+                Intent intent2 = new Intent(getApplicationContext(), Act_Publish_Post.class);
+                intent2.putExtra("cm_id", cm_id);
+                startActivity(intent2);
                 break;
         }
 
