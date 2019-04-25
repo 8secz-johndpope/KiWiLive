@@ -39,6 +39,7 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
+                                android:id="@+id/communitydetails_back"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dip_200"
                                 android:background="@mipmap/icon_communitydetails_bg" />

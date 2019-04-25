@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/dip_10"
-            android:text="最的活跃用户"
+            android:text="最近活跃用户"
             android:textColor="#9B9B9B"
             android:textSize="@dimen/fond_14sp" />
 

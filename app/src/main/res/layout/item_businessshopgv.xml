@@ -9,7 +9,7 @@
         android:id="@+id/iv_channel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_100"
-        android:scaleType="fitCenter" />
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/iv_shutdown"

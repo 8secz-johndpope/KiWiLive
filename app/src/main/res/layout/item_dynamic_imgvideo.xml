@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:paddingBottom="@dimen/dip_10"
     android:layout_height="wrap_content">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +31,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/dip_10"
             android:background="@mipmap/bg_test"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:riv_border_color="#333333"
             app:riv_corner_radius="@dimen/dip_2"
             app:riv_mutate_background="true"

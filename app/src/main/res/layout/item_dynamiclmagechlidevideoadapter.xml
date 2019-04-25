@@ -4,13 +4,27 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/grid_icon"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dip_120"
-        android:scaleType="centerCrop"
-        app:riv_border_color="#333333"
-        app:riv_corner_radius="@dimen/dip_3"
-        app:riv_mutate_background="true"
-        app:riv_tile_mode="repeat" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dip_120">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/grid_icon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_120"
+            android:scaleType="centerCrop"
+            app:riv_border_color="#333333"
+            android:src="@mipmap/icon_test"
+            app:riv_corner_radius="@dimen/dip_3"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="repeat" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:padding="@dimen/dip_5"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@mipmap/icon_minvideo"
+            />
+    </RelativeLayout>
+
 </LinearLayout>

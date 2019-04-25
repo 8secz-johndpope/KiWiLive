@@ -8,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
@@ -53,6 +55,7 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
     private RoundedImageView avatar;
     private TextView name, community_desc, follow_status, post_count, user_count, notice;
     SVProgressHUD mSVProgressHUD;
+    private ImageView backImg;
 
     @Override
     protected int getLayoutId() {
@@ -85,6 +88,7 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
         post_count = findViewById(R.id.post_count);
         mIndicator = findViewById(R.id.indicator);
         mViewPager = findViewById(R.id.viewPager);
+        backImg = findViewById(R.id.communitydetails_back);
     }
 
     int prePosition = 0;
@@ -203,6 +207,7 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
             @Override
             public void onSuccess(int code, String msg, String[] info) {
                 mSVProgressHUD.dismiss();
+                Log.e("aa","--------"+info[0]);
                 Gson gson = new Gson();
                 bean = gson.fromJson(info[0], CommunitChlideBean.class);
                 Glide.with(Act_CommunityDetails.this).load(bean.getAvatar_icon()).into(avatar);
@@ -216,6 +221,11 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
                 post_count.setText(bean.getPost_count());
                 user_count.setText(bean.getUser_count());
                 notice.setText(bean.getNotice());
+                if (bean.getImgs() != null) {
+                    if (bean.getImgs().size() > 0) {
+                        Glide.with(getBaseContext()).load(bean.getImgs().get(0).getImgs()).into(backImg);
+                    }
+                }
             }
         });
     }

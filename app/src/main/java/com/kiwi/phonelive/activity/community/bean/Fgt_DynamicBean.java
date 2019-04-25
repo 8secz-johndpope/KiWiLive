@@ -9,6 +9,15 @@ public class Fgt_DynamicBean implements MultiItemEntity {
     public static final int Stats2 = 2;
     public static final int Stats3 = 3;
     public static final int Stats4 = 4;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     /**
      * id : 2
      * title : 葬爱家族1
@@ -24,7 +33,7 @@ public class Fgt_DynamicBean implements MultiItemEntity {
      * text : []
      * imgs : ["http://qiniu.kiwiapp.vip/2019-03-18/5c8f2d3b362e5.jpg","http://qiniu.kiwiapp.vip/2019-03-18/5c8f2d3b6252c.png","http://qiniu.kiwiapp.vip/2019-03-18/5c8f2d3b74cdb.jpg"]
      */
-
+    private String uid;
     private String id;
     private String title;
     private int addtime;

@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -82,12 +83,14 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
             viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videodetlie, null);
             title = viewHader.findViewById(R.id.my_notice_title);
             myVideo = viewHader.findViewById(R.id.videoplayer);
-        } else {//图片
+        } else if (status.equals("img")) {//图片
             viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videoimgdetlie, null);
             title = viewHader.findViewById(R.id.my_notice_title);
             title.setText("图片详情");
             view_img = viewHader.findViewById(R.id.grid_icon);
             myGridViw = viewHader.findViewById(R.id.gv_DynamicPics);
+        } else if (status.equals("text")){
+            viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videotextdetlie, null);
         }
         haderImage = viewHader.findViewById(R.id.avatar);
         name = viewHader.findViewById(R.id.community_name);
@@ -117,7 +120,7 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
                     myVideo.setUp(bean.getVideo()
                             , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "");
                     Glide.with(getBaseContext()).load(bean.getVideo_img()).into(myVideo.thumbImageView);
-                } else {//图片、
+                } else if (status.equals("img")) {//图片、
                     if (bean.getImgs() == null) {
                         view_img.setVisibility(View.GONE);
                         myGridViw.setVisibility(View.GONE);
@@ -133,6 +136,9 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
                         CommunityGridViewAdapter adapter = new CommunityGridViewAdapter(mContext, bean.getImgs());
                         myGridViw.setAdapter(adapter);
                     }
+                } else {
+
+
                 }
                 Glide.with(getBaseContext()).load(bean.getAvatar_thumb()).into(haderImage);
                 name.setText(bean.getUser_nicename());

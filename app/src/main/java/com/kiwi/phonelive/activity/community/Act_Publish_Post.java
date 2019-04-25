@@ -253,6 +253,9 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
         if (Carmer_file.get(Carmer_file.size() - 1).getPath().equals("")) {
             Carmer_file.remove(Carmer_file.size() - 1);
         }
+//        for (int i=0;i<Carmer_file.size();i++){
+//            Log.e("aa","-----------"+Carmer_file.get(i).getPath());
+//        }
         HttpUtil.updateImgText(Carmer_file, cm_id, tvTitle.getText().toString(), new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {

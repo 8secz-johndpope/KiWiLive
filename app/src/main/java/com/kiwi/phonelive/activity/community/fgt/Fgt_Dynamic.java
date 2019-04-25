@@ -127,7 +127,7 @@ public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItem
                     datas.add(fgt_dynamicBean);
                 }
                 if (adapter == null) {
-                    adapter = new Fgt_DynamicAdapter(datas, getContext());
+                    adapter = new Fgt_DynamicAdapter(datas, getContext(),cm_id);
                     adapter.setOnItemChildClickListener(Fgt_Dynamic.this);
                     myRecyclerview.setAdapter(adapter);
                 } else {
@@ -136,21 +136,37 @@ public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItem
             }
         });
     }
-
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
         switch (view.getId()) {
             case R.id.item_videoImage:
-//                Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
-//                intent.putExtra("cm_id", cm_id+ "");
-//                intent.putExtra("uid", datas.get(position).getId().getUid());
-//                intent.putExtra("post_id",datas.get(position).getPost_id());
-//                if (datas.get(position).getVideo_img() != null) {
-//                    intent.putExtra("status", "video");
-//                } else {
-//                    intent.putExtra("status", "img");
-//                }
-//                mContext.startActivity(intent);
+                intent.putExtra("cm_id", cm_id + "");
+                intent.putExtra("uid", datas.get(position).getUid());
+                intent.putExtra("post_id", datas.get(position).getId());
+                intent.putExtra("status", "video");
+                mContext.startActivity(intent);
+                break;
+            case R.id.my_text_item:
+                intent.putExtra("cm_id", cm_id + "");
+                intent.putExtra("uid", datas.get(position).getUid());
+                intent.putExtra("post_id", datas.get(position).getId());
+                intent.putExtra("status", "text");
+                mContext.startActivity(intent);
+                break;
+            case R.id.myImgMax:
+                intent.putExtra("cm_id", cm_id + "");
+                intent.putExtra("uid", datas.get(position).getUid());
+                intent.putExtra("post_id", datas.get(position).getId());
+                intent.putExtra("status", "img");
+                mContext.startActivity(intent);
+                break;
+            case R.id.item_imgGridview:
+                intent.putExtra("cm_id", cm_id + "");
+                intent.putExtra("uid", datas.get(position).getUid());
+                intent.putExtra("post_id", datas.get(position).getId());
+                intent.putExtra("status", "img");
+                mContext.startActivity(intent);
                 break;
         }
     }
