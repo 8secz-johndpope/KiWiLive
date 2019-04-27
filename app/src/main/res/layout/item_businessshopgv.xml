@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/iv_channel"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dip_120"
         android:layout_height="@dimen/dip_100"
         android:scaleType="centerCrop" />
 

@@ -68,29 +68,24 @@
 
         <LinearLayout
             android:id="@+id/ll_video"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dip_100"
+            android:layout_width="@dimen/dip_120"
+            android:layout_height="@dimen/dip_100"
+            android:layout_marginTop="@dimen/dip_110"
             android:orientation="vertical"
-            android:padding="@dimen/dip_10"
-            android:visibility="gone">
+            android:padding="@dimen/dip_5">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_commun2">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_videoadd" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/icon_video2"
-                    android:drawablePadding="@dimen/dip_20"
-                    android:paddingLeft="@dimen/dip_40"
-                    android:paddingTop="@dimen/dip_20"
-                    android:paddingRight="@dimen/dip_40"
-                    android:paddingBottom="@dimen/dip_20"
-                    android:text="添加视频" />
-            </RelativeLayout>
+            <cn.jzvd.JZVideoPlayerStandard
+                android:id="@+id/videoplayer"
+                android:layout_width="100dip"
+                android:layout_height="100dip"
+                android:layout_marginTop="@dimen/dip_100"
+                android:visibility="gone" />
         </LinearLayout>
 
         <EditText
@@ -104,11 +99,12 @@
             android:minLines="10"
             android:padding="@dimen/dip_10"
             android:visibility="gone" />
+
         <com.kiwi.phonelive.views.MyGridView
-            android:layout_marginTop="@dimen/dip_100"
             android:id="@+id/recycler_issue_column"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_100"
             android:numColumns="3" />
     </LinearLayout>
 

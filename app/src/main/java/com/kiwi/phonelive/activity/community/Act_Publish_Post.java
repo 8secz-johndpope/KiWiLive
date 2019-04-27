@@ -72,7 +72,6 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
     private EditText llText, tvTitle;
     private MyGridView myGridView;
     private String cm_id;
-
     public void initView() {
         findViewById(R.id.publish_ll3).setOnClickListener(this);
         findViewById(R.id.publish_ll2).setOnClickListener(this);

@@ -115,6 +115,7 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
             @Override
             public void onSuccess(int code, String msg, String[] info) {
                 Gson gson = new Gson();
+
                 VideoImgDetileBean bean = gson.fromJson(info[0], VideoImgDetileBean.class);
                 if (status.equals("video")) {//视频
                     myVideo.setUp(bean.getVideo()
