@@ -265,7 +265,6 @@ public class MainActivity extends AbsActivity {
             }
         });
     }
-
     /**
      * 签到奖励
      */

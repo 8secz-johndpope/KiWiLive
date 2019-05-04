@@ -7,8 +7,11 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Debug;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -19,10 +22,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,29 +35,44 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.kiwi.phonelive.AppConfig;
+import com.kiwi.phonelive.Constants;
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.activity.AbsActivity;
 import com.kiwi.phonelive.activity.VideoRecordActivity;
 import com.kiwi.phonelive.activity.community.adapter.BusinessShopGridAdapter;
 import com.kiwi.phonelive.activity.community.dialog.Dlg_Photograph;
+import com.kiwi.phonelive.bean.ConfigBean;
 import com.kiwi.phonelive.bean.UserBean;
 import com.kiwi.phonelive.glide.ImgLoader;
 import com.kiwi.phonelive.http.HttpCallback;
 import com.kiwi.phonelive.http.HttpUtil;
 import com.kiwi.phonelive.interfaces.ImageResultCallback;
+import com.kiwi.phonelive.upload.VideoUploadBean;
+import com.kiwi.phonelive.upload.VideoUploadCallback;
+import com.kiwi.phonelive.upload.VideoUploadQnImpl;
+import com.kiwi.phonelive.upload.VideoUploadTxImpl;
+import com.kiwi.phonelive.utils.DialogUitl;
 import com.kiwi.phonelive.utils.ProcessImageUtil;
 import com.kiwi.phonelive.utils.ProcessResultUtil;
 import com.kiwi.phonelive.utils.ToastUtil;
+import com.kiwi.phonelive.utils.WordUtil;
 import com.kiwi.phonelive.views.MyGridView;
+import com.tencent.rtmp.ITXLivePlayListener;
+import com.tencent.rtmp.TXLiveConstants;
+import com.tencent.rtmp.TXLivePlayConfig;
+import com.tencent.rtmp.TXLivePlayer;
+import com.tencent.rtmp.ui.TXCloudVideoView;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 社区详情。。列表发布
  */
-public class Act_Publish_Post extends AbsActivity implements View.OnClickListener, AdapterView.OnItemClickListener, Dlg_Photograph.OnClick, BusinessShopGridAdapter.onBackImgShut {
+public class Act_Publish_Post extends AbsActivity implements View.OnClickListener, AdapterView.OnItemClickListener, Dlg_Photograph.OnClick, BusinessShopGridAdapter.onBackImgShut, ITXLivePlayListener {
     @Override
     protected int getLayoutId() {
         return R.layout.act_publish_post;
@@ -72,7 +92,12 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
     private EditText llText, tvTitle;
     private MyGridView myGridView;
     private String cm_id;
+    private TXLivePlayer mPlayer;
+    private boolean mPlayStarted;//播放是否开始了
+    private TXCloudVideoView mTXCloudVideoView;
+
     public void initView() {
+        mTXCloudVideoView = findViewById(R.id.video_view);
         findViewById(R.id.publish_ll3).setOnClickListener(this);
         findViewById(R.id.publish_ll2).setOnClickListener(this);
         findViewById(R.id.publish_ll1).setOnClickListener(this);
@@ -94,6 +119,7 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
     private BusinessShopGridAdapter adapter;
     private ProcessImageUtil mImageUtil;
     private ProcessResultUtil mProcessResultUtil;
+    private String mVideoPath;
 
     public void initData() {
         mProcessResultUtil = new ProcessResultUtil(this);
@@ -132,6 +158,23 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
             }
         });
         swche(0);
+        //视频回调
+        Intent intent = getIntent();
+        mVideoPath = intent.getStringExtra(Constants.VIDEO_PATH);
+        if (TextUtils.isEmpty(mVideoPath)) {
+            return;
+        }
+        mPlayer = new TXLivePlayer(mContext);
+        mPlayer.setConfig(new TXLivePlayConfig());
+        mPlayer.setPlayerView(mTXCloudVideoView);
+        mPlayer.enableHardwareDecode(false);
+        mPlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
+        mPlayer.setRenderMode(TXLiveConstants.RENDER_MODE_FULL_FILL_SCREEN);
+        mPlayer.setPlayListener(this);
+        int result = mPlayer.startPlay(mVideoPath, TXLivePlayer.PLAY_TYPE_LOCAL_VIDEO);
+        if (result == 0) {
+            mPlayStarted = true;
+        }
     }
 
     @Override
@@ -258,7 +301,7 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
         HttpUtil.updateImgText(Carmer_file, cm_id, tvTitle.getText().toString(), new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
-                if (code==0) {
+                if (code == 0) {
                     Toast.makeText(getApplicationContext(), "发布成功！", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -300,5 +343,142 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
             }
         });
 
+    }
+
+//
+//    /**
+//     * 发布视频
+//     */
+//    private ConfigBean mConfigBean;
+//    private void publishVideo() {
+//        if (mConfigBean == null) {
+//            return;
+//        }
+//        String title = mInput.getText().toString().trim();
+//        //产品要求把视频描述判断去掉
+////        if (TextUtils.isEmpty(title)) {
+////            ToastUtil.show(R.string.video_title_empty);
+////            return;
+////        }
+//        mVideoTitle = title;
+//        if (TextUtils.isEmpty(mVideoPath)) {
+//            return;
+//        }
+//        mLoading = DialogUitl.loadingDialog(mContext, WordUtil.getString(R.string.video_pub_ing));
+//        mLoading.show();
+//        Bitmap bitmap = null;
+//        //生成视频封面图
+//        MediaMetadataRetriever mmr = null;
+//        try {
+//            mmr = new MediaMetadataRetriever();
+//            mmr.setDataSource(mVideoPath);
+//            bitmap = mmr.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (mmr != null) {
+//                mmr.release();
+//            }
+//        }
+//        if (bitmap == null) {
+//            if (mLoading != null) {
+//                mLoading.dismiss();
+//            }
+//            ToastUtil.show(R.string.video_cover_img_failed);
+//            return;
+//        }
+//        String coverImagePath = mVideoPath.replace(".mp4", ".jpg");
+//        File imageFile = new File(coverImagePath);
+//        FileOutputStream fos = null;
+//        try {
+//            fos = new FileOutputStream(imageFile);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//            fos.flush();
+//            fos.close();
+//        } catch (Exception e) {
+//            imageFile = null;
+//            e.printStackTrace();
+//        } finally {
+//            if (fos != null) {
+//                try {
+//                    fos.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        if (bitmap != null) {
+//            bitmap.recycle();
+//        }
+//        if (imageFile == null) {
+//            if (mLoading != null) {
+//                mLoading.dismiss();
+//            }
+//            ToastUtil.show(R.string.video_cover_img_failed);
+//            return;
+//        }
+//        if (mConfigBean.getVideoCloudType() == 1) {
+//            mUploadStrategy = new VideoUploadQnImpl(mConfigBean);
+//        } else {
+//            mUploadStrategy = new VideoUploadTxImpl(mConfigBean);
+//        }
+//        mUploadStrategy.upload(new VideoUploadBean(new File(mVideoPath), imageFile), new VideoUploadCallback() {
+//            @Override
+//            public void onSuccess(VideoUploadBean bean) {
+//                if (mSaveType == Constants.VIDEO_SAVE_PUB) {
+//                    bean.deleteFile();
+//                }
+//                saveUploadVideoInfo(bean);
+//            }
+//
+//            @Override
+//            public void onFailure() {
+//                ToastUtil.show(R.string.video_pub_failed);
+//                if (mLoading != null) {
+//                    mLoading.dismiss();
+//                }
+//            }
+//        });
+//    }
+
+    @Override
+    public void onPlayEvent(int e, Bundle bundle) {
+        switch (e) {
+            case TXLiveConstants.PLAY_EVT_PLAY_END://播放结束
+                onReplay();
+                break;
+            case TXLiveConstants.PLAY_EVT_CHANGE_RESOLUTION:
+                onVideoSizeChanged(bundle.getInt("EVT_PARAM1", 0), bundle.getInt("EVT_PARAM2", 0));
+                break;
+        }
+    }
+
+    @Override
+    public void onNetStatus(Bundle bundle) {
+
+    }
+
+    /**
+     * 循环播放
+     */
+    private void onReplay() {
+        if (mPlayStarted && mPlayer != null) {
+            mPlayer.seek(0);
+            mPlayer.resume();
+        }
+    }
+
+    /**
+     * 获取到视频宽高回调
+     */
+    public void onVideoSizeChanged(float videoWidth, float videoHeight) {
+        if (mTXCloudVideoView != null && videoWidth > 0 && videoHeight > 0) {
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mTXCloudVideoView.getLayoutParams();
+            if (videoWidth / videoHeight > 0.5625f) {//横屏 9:16=0.5625
+                params.height = (int) (mTXCloudVideoView.getWidth() / videoWidth * videoHeight);
+                params.gravity = Gravity.CENTER;
+                mTXCloudVideoView.requestLayout();
+            }
+        }
     }
 }

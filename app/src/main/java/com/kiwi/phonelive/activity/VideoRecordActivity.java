@@ -575,7 +575,6 @@ public class VideoRecordActivity extends AbsActivity implements
             mVideoPath = data.getStringExtra(Constants.VIDEO_PATH);
             mDuration = data.getLongExtra(Constants.VIDEO_DURATION, 0);
             mFromRecord = false;
-            Log.e("aa","---------"+mVideoPath);
             startPreProcess();
         }
     }
@@ -932,19 +931,22 @@ public class VideoRecordActivity extends AbsActivity implements
      * 执行预处理
      */
     private void doPreProcess() {
+        Log.e("aa", "----------执行预处理==="+mVideoPath);
         mProcessStarted = true;
         try {
             mVideoEditer = VideoEditUtil.getInstance().createVideoEditer(mContext, mVideoPath);
-            mVideoEditer.setVideoProcessListener(this);
-            mVideoEditer.setThumbnailListener(this);
+            mVideoEditer.setVideoProcessListener(this);// 视频预处理进度回调设置自定义图像处理回调
+            mVideoEditer.setThumbnailListener(this); //  设置缩略图回调
             int thumbnailCount = (int) Math.floor(mDuration / 1000f);
+            Log.e("aa", "----------执行预处理==thumbnailCount="+thumbnailCount);
             TXVideoEditConstants.TXThumbnail thumbnail = new TXVideoEditConstants.TXThumbnail();
             thumbnail.count = thumbnailCount;
             thumbnail.width = 100;
             thumbnail.height = 100;
-            mVideoEditer.setThumbnail(thumbnail);
-            mVideoEditer.processVideo();
+            mVideoEditer.setThumbnail(thumbnail);//设置预处理输出的缩略图
+            mVideoEditer.processVideo();//进行视频预处理
         } catch (Exception e) {
+            Log.e("aa", "----------Exception="+e.getMessage());
             processFailed();
         }
     }

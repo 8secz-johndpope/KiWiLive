@@ -535,7 +535,6 @@ public class VideoEditActivity extends AbsActivity implements TXVideoEditer.TXVi
 //                startGenerateVideo();
 //            }
 //        });
-
         startGenerateVideo();
     }
 

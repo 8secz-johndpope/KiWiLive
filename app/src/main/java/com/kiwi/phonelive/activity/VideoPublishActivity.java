@@ -114,8 +114,8 @@ public class VideoPublishActivity extends AbsActivity implements ITXLivePlayList
                 }
             }
         });
-        mNum = (TextView) findViewById(R.id.num);
-        mInput = (EditText) findViewById(R.id.input);
+        mNum = findViewById(R.id.num);
+        mInput = findViewById(R.id.input);
         mInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,6 +136,7 @@ public class VideoPublishActivity extends AbsActivity implements ITXLivePlayList
         });
         mLocation = findViewById(R.id.location);
         mLocation.setText(AppConfig.getInstance().getCity());
+
         mTXCloudVideoView = findViewById(R.id.video_view);
         mPlayer = new TXLivePlayer(mContext);
         mPlayer.setConfig(new TXLivePlayConfig());
@@ -260,6 +261,7 @@ public class VideoPublishActivity extends AbsActivity implements ITXLivePlayList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pub:
+
                 publishVideo();
                 break;
         }
@@ -390,6 +392,7 @@ public class VideoPublishActivity extends AbsActivity implements ITXLivePlayList
                 }
             }
         });
+
     }
 
 

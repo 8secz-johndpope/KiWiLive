@@ -79,13 +79,11 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/icon_videoadd" />
-
-            <cn.jzvd.JZVideoPlayerStandard
+            <com.tencent.rtmp.ui.TXCloudVideoView
                 android:id="@+id/videoplayer"
                 android:layout_width="100dip"
                 android:layout_height="100dip"
-                android:layout_marginTop="@dimen/dip_100"
-                android:visibility="gone" />
+                />
         </LinearLayout>
 
         <EditText
