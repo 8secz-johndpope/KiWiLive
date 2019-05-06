@@ -138,7 +138,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dip_220"
         android:layout_marginTop="@dimen/dip_10"
-        android:scaleType="centerCrop"
         app:riv_border_color="#333333"
         app:riv_corner_radius="@dimen/dip_3"
         app:riv_mutate_background="true"

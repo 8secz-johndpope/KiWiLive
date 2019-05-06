@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/view_title"/>
+    <include layout="@layout/view_title" />
 
     <RelativeLayout
         android:id="@+id/btn_avatar"
         style="@style/edit_profile_group"
-        android:onClick="editProfileClick"
-        >
+        android:onClick="editProfileClick">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/avatar"
@@ -20,8 +18,7 @@
             android:layout_height="46dp"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
-            app:riv_oval="true"
-            />
+            app:riv_oval="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,17 +27,20 @@
             android:layout_marginLeft="70dp"
             android:text="@string/edit_profile_avatar"
             android:textColor="@color/gray3"
-            android:textSize="16sp"
-            />
-
+            android:textSize="16sp" />
+        <ImageView
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_arrow_right" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/btn_name"
         style="@style/edit_profile_group"
-        android:onClick="editProfileClick"
-        >
+        android:onClick="editProfileClick">
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,8 +48,7 @@
             android:layout_centerVertical="true"
             android:text="@string/edit_profile_nickname"
             android:textColor="@color/gray3"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/name"
@@ -59,19 +58,23 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="40dp"
             android:ellipsize="end"
+            android:gravity="right"
             android:singleLine="true"
-            android:textColor="@color/textColor"
+            android:textColor="@color/global"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
-
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_arrow_right" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/btn_sign"
         style="@style/edit_profile_group"
-        android:onClick="editProfileClick"
-        >
+        android:onClick="editProfileClick">
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,8 +82,7 @@
             android:layout_centerVertical="true"
             android:text="@string/edit_profile_sign"
             android:textColor="@color/gray3"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/sign"
@@ -90,19 +92,23 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="40dp"
             android:ellipsize="end"
+            android:gravity="right"
             android:singleLine="true"
-            android:textColor="@color/gray3"
+            android:textColor="@color/global"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
-
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_arrow_right" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/btn_birthday"
         style="@style/edit_profile_group"
-        android:onClick="editProfileClick"
-        >
+        android:onClick="editProfileClick">
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,8 +116,7 @@
             android:layout_centerVertical="true"
             android:text="@string/edit_profile_birthday"
             android:textColor="@color/gray3"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/birthday"
@@ -121,19 +126,23 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="40dp"
             android:ellipsize="end"
+            android:gravity="right"
             android:singleLine="true"
-            android:textColor="@color/textColor"
+            android:textColor="@color/global"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
-
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_arrow_right" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/btn_sex"
         style="@style/edit_profile_group"
-        android:onClick="editProfileClick"
-        >
+        android:onClick="editProfileClick">
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,28 +150,34 @@
             android:layout_centerVertical="true"
             android:text="@string/edit_profile_sex"
             android:textColor="@color/gray3"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="70dp"
-            android:textColor="@color/textColor"
+            android:layout_marginRight="@dimen/dp_40"
+            android:drawablePadding="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:textColor="@color/global"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
-
+        <ImageView
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_arrow_right" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/btn_impression"
         style="@style/edit_profile_group"
-        android:onClick="editProfileClick"
-        >
+        android:onClick="editProfileClick">
 
         <TextView
             android:layout_width="wrap_content"
@@ -170,8 +185,13 @@
             android:layout_centerVertical="true"
             android:text="@string/edit_profile_impression"
             android:textColor="@color/gray3"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
+        <ImageView
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_arrow_right" />
 
     </RelativeLayout>
 

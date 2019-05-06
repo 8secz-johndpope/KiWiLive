@@ -99,6 +99,7 @@ public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItem
         HttpUtil.getCommunity_get_post(com_page, cm_id, new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
+                Log.e("aa","------------"+msg+"---------"+info[0]);
                 Gson gson = new Gson();
                 DynamicBean bean = gson.fromJson(info[0], DynamicBean.class);
                 for (int i = 0; i < bean.getPost_info().size(); i++) {

@@ -1,5 +1,6 @@
 package com.kiwi.phonelive.activity.community;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Debug;
 import android.support.v7.widget.LinearLayoutManager;
@@ -88,6 +89,14 @@ public class Act_ActiveUsers extends AbsActivity implements BaseQuickAdapter.OnI
             case R.id.follow_status://关注
                 setCircle_follow(position);
                 break;
+            case R.id.account:
+//                Intent intent = new Intent(mContext, Act_CommunityDetails.class);
+//                intent.putExtra("cm_id", datas.get(position).get.getId() + "");
+//                mContext.startActivity(intent);
+                break;
+
+
+
         }
     }
 

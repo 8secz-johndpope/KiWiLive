@@ -104,7 +104,7 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
 
     public void initData() {
         postHader();
-        post_comment();
+//        post_comment();
     }
 
     /**

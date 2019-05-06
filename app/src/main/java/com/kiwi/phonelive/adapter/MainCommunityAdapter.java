@@ -189,7 +189,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
             if (bean.getRecommend_info() != null) {
                 for (int i = 0; i < bean.getRecommend_info().size(); i++) {
                     if (i < 6) {
-                        if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
+                        if (bean.getRecommend_info().get(i).getVideo_img() != null) {
                             ImgLoader.displayAvatar(bean.getRecommend_info().get(i).getVideo_img(), img6[i]);
                         } else {
                             ImgLoader.displayAvatar(bean.getRecommend_info().get(i).getImgs(), img6[i]);
@@ -231,7 +231,7 @@ public class MainCommunityAdapter extends RefreshAdapter<CommunitChlideBeanZhu> 
                             }
                         });
                         titleStatus[i].setVisibility(View.VISIBLE);
-                        if (bean.getRecommend_info().get(idextPage).getVideo_img() != null) {
+                        if (bean.getRecommend_info().get(i).getVideo_img() != null) {
                             titleStatus[i].setText("视频");
                         } else {
                             titleStatus[i].setText("图片");

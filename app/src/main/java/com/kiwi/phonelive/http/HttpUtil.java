@@ -1809,6 +1809,7 @@ public class HttpUtil {
         HttpClient.getInstance().get("Community.post_info", HttpConsts.COMMUNITY)
                 .params("post_id", post_id)
                 .params("cm_id", cm_id)
+                .params("token", AppConfig.getInstance().getToken())
                 .params("uid", AppConfig.getInstance().getUid())
                 .execute(callback);
     }
