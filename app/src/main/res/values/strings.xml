@@ -403,7 +403,7 @@
     <string name="setting_clear_cache">缓存已清除</string>
     <string name="search">搜索</string>
     <string name="search_hint">请输入要搜索的昵称或ID</string>
-    <string name="search_no_data">没有搜索到相关内容</string>
+    <string name="search_no_data">未找到相关内容哦</string>
     <string name="share_type_qq">QQ</string>
     <string name="share_type_qzone">QQ空间</string>
     <string name="share_type_wx">微信</string>

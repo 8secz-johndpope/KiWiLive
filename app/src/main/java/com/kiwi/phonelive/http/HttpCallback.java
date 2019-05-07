@@ -1,6 +1,7 @@
 package com.kiwi.phonelive.http;
 
 import android.app.Dialog;
+import android.os.Debug;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -42,9 +43,6 @@ public abstract class HttpCallback extends AbsCallback<JsonBean> {
         if (bean != null) {
             if (200 == bean.getRet()) {
                 Data data = bean.getData();
-//                for (int i=0;i< data.getInfo().length;i++){
-//                    Log.e("aa", "-------------------1111///////////==processData=======" +  data.getInfo()[i]);
-//                }
                 if (data != null) {
                     if (700 == data.getCode()) {
                         //token过期，重新登录

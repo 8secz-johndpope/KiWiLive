@@ -106,7 +106,6 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
         postHader();
 //        post_comment();
     }
-
     /**
      * 获取头部信息
      */
@@ -165,7 +164,6 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
      */
     List<VideoImageDetalieBean> datas = new ArrayList<>();
     private VideoImgDetlieAdapter adapter;
-
     public void post_comment() {
         datas.clear();
         HttpUtil.post_comment(post_id, new HttpCallback() {

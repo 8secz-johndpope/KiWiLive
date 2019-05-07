@@ -1776,6 +1776,7 @@ public class HttpUtil {
     public static void getcommunity_video(String cm_id, HttpCallback callback) {
         HttpClient.getInstance().get("Community.community_video", HttpConsts.COMMUNITY)
                 .params("cm_id", cm_id)
+                .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())
                 .execute(callback);
     }
@@ -1869,10 +1870,11 @@ public class HttpUtil {
                 .params("file_img", file_img)
                 .execute(callback);
     }
+
     /**
      * 上传Text
      */
-    public static void updateText(String cm_id, String title, String text,  HttpCallback callback) {
+    public static void updateText(String cm_id, String title, String text, HttpCallback callback) {
         HttpClient.getInstance().post("Community.add_post_text", HttpConsts.UPDATE_AVATAR)
                 .isMultipart(true)
                 .params("token", AppConfig.getInstance().getToken())

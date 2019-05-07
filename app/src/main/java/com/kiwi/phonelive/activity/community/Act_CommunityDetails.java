@@ -207,7 +207,6 @@ public class Act_CommunityDetails extends AbsActivity implements View.OnClickLis
             @Override
             public void onSuccess(int code, String msg, String[] info) {
                 mSVProgressHUD.dismiss();
-                Log.e("aa","--------"+info[0]);
                 Gson gson = new Gson();
                 bean = gson.fromJson(info[0], CommunitChlideBean.class);
                 Glide.with(Act_CommunityDetails.this).load(bean.getAvatar_icon()).into(avatar);

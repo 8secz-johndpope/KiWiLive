@@ -95,7 +95,7 @@ public class MyProfitActivity extends AbsActivity implements View.OnClickListene
         });
         mVotesName = AppConfig.getInstance().getVotesName();
         mAllName.setText("总" + mVotesName + "数");
-        mCanName.setText("可提现" + mVotesName + "数");
+        mCanName.setText("可提取" + mVotesName + "数");
         mGetName.setText("输入要提取的" + mVotesName + "数");
         mBtnCash = findViewById(R.id.btn_cash);
         mBtnCash.setOnClickListener(this);

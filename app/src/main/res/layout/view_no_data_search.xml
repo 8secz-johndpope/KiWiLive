@@ -9,20 +9,13 @@
     android:layout_centerInParent="true"
     >
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="@string/sorry"
+        android:src="@mipmap/search_empty_icon"
         android:textColor="@color/textColor"
         android:textSize="14sp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_no_data"
-        android:textColor="@color/gray1"
-        android:textSize="14sp"
-        />
 </LinearLayout>

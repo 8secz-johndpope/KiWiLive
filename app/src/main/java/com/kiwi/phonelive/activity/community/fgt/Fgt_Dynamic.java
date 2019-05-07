@@ -95,11 +95,14 @@ public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItem
     List<Fgt_DynamicBean> datas = new ArrayList<>();
     private Fgt_DynamicAdapter adapter;
 
+    /**
+     * 获取动态列表
+     */
     public void postBackData() {
         HttpUtil.getCommunity_get_post(com_page, cm_id, new HttpCallback() {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
-                Log.e("aa","------------"+msg+"---------"+info[0]);
+                Log.e("aa", "---------动态==" + info[0]);
                 Gson gson = new Gson();
                 DynamicBean bean = gson.fromJson(info[0], DynamicBean.class);
                 for (int i = 0; i < bean.getPost_info().size(); i++) {
@@ -128,7 +131,7 @@ public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItem
                     datas.add(fgt_dynamicBean);
                 }
                 if (adapter == null) {
-                    adapter = new Fgt_DynamicAdapter(datas, getContext(),cm_id);
+                    adapter = new Fgt_DynamicAdapter(datas, getContext(), cm_id);
                     adapter.setOnItemChildClickListener(Fgt_Dynamic.this);
                     myRecyclerview.setAdapter(adapter);
                 } else {
@@ -137,6 +140,7 @@ public class Fgt_Dynamic extends BaseFragment implements BaseQuickAdapter.OnItem
             }
         });
     }
+
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         Intent intent = new Intent(mContext, Act_VideoImgDetlie.class);
