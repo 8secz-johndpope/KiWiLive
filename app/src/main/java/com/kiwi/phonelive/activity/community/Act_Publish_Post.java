@@ -29,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +89,7 @@ public class Act_Publish_Post extends AbsActivity implements View.OnClickListene
     }
 
     private TextView title[] = new TextView[3];
-    private LinearLayout llVideo;
+    private RelativeLayout llVideo;
     private EditText llText, tvTitle;
     private MyGridView myGridView;
     private String cm_id;

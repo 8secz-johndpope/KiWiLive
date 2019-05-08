@@ -97,7 +97,7 @@ public class MainCommunitChlideViewHolder extends AbsMainChildTopViewHolder impl
     @Override
     public void backItem(int position, CommunitChlideBeanZhu bean) {
         Intent intent = new Intent(mContext, Act_CommunityDetails.class);
-        intent.putExtra("cm_id", bean.getId() + "");
+        intent.putExtra("cm_id", bean.getCm_id() + "");
         mContext.startActivity(intent);
     }
 }

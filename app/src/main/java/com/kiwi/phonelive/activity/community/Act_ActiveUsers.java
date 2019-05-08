@@ -14,6 +14,7 @@ import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kiwi.phonelive.R;
 import com.kiwi.phonelive.activity.AbsActivity;
+import com.kiwi.phonelive.activity.UserHomeActivity;
 import com.kiwi.phonelive.activity.community.adapter.ActiveUsersAdapter;
 import com.kiwi.phonelive.activity.community.bean.Active_usersBean;
 import com.kiwi.phonelive.bean.CommunitChlideBeanZhu;
@@ -93,6 +94,12 @@ public class Act_ActiveUsers extends AbsActivity implements BaseQuickAdapter.OnI
 //                Intent intent = new Intent(mContext, Act_CommunityDetails.class);
 //                intent.putExtra("cm_id", datas.get(position).get.getId() + "");
 //                mContext.startActivity(intent);
+                break;
+            case R.id.user_geren:
+                if(position>=4){
+                    return;
+                }
+                UserHomeActivity.forward(mContext, datas.get(position).getUid());
                 break;
 
 

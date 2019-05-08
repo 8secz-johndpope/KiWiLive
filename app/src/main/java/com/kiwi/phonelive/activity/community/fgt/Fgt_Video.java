@@ -102,6 +102,10 @@ public class Fgt_Video extends BaseFragment {
             @Override
             public void onSuccess(int code, String msg, String[] info) {
                 datas = JSON.parseArray(Arrays.toString(info), Fgt_VideoBean.class);
+                if(datas==null||datas.size()==0){
+                    return;
+                }
+
                 Fgt_DynamicChlideVideoAdapter adapter=new  Fgt_DynamicChlideVideoAdapter(getContext(),datas);
                 grideVIew.setAdapter(adapter);
             }

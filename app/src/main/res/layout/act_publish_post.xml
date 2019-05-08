@@ -66,25 +66,24 @@
             android:textColorHighlight="#CBCBCB"
             android:textSize="@dimen/fond_16sp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ll_video"
-            android:layout_width="@dimen/dip_120"
-            android:layout_height="@dimen/dip_100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dip_110"
-            android:orientation="vertical"
             android:padding="@dimen/dip_5">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/dip_110"
+                android:layout_height="@dimen/dip_100"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/icon_videoadd" />
+
             <com.tencent.rtmp.ui.TXCloudVideoView
                 android:id="@+id/videoplayer"
                 android:layout_width="100dip"
-                android:layout_height="100dip"
-                />
-        </LinearLayout>
+                android:layout_height="100dip" />
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/ed_text"
@@ -102,7 +101,7 @@
             android:id="@+id/recycler_issue_column"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dip_100"
+            android:layout_marginTop="@dimen/dip_110"
             android:numColumns="3" />
     </LinearLayout>
 

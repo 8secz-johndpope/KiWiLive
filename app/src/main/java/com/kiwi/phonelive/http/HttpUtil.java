@@ -1821,7 +1821,7 @@ public class HttpUtil {
     public static void post_comment(String post_id, HttpCallback callback) {
         HttpClient.getInstance().get("Community.post_comment", HttpConsts.COMMUNITY)
                 .params("post_id", post_id)
-                .params("uid", "1")
+                .params("uid", AppConfig.getInstance().getUid())
                 .params("token", AppConfig.getInstance().getToken())
                 .execute(callback);
     }

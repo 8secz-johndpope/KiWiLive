@@ -26,12 +26,13 @@ public class ActiveUsersAdapter extends BaseQuickAdapter<Active_usersBean, BaseV
     protected void convert(BaseViewHolder helper, Active_usersBean item) {
         ImgLoader.displayAvatar(item.getAvatar_thumb(), (RoundedImageView) helper.getView(R.id.avatar));
         helper.setText(R.id.ActiveUsersAdapter_name, item.getUser_nicename())
-                .setText(R.id.ActiveUsersAdapter_desc,item.getSignature());
+                .setText(R.id.ActiveUsersAdapter_desc, item.getSignature());
         if (item.getFollow_status() == 1) {
             helper.setText(R.id.follow_status, "已关注");
         } else {
             helper.setText(R.id.follow_status, "+ 关注");
         }
         helper.addOnClickListener(R.id.follow_status);
+        helper.addOnClickListener(R.id.user_geren);
     }
 }

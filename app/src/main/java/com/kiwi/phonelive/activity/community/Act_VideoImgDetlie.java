@@ -27,13 +27,18 @@ import com.kiwi.phonelive.adapter.CommunityGridViewAdapter;
 import com.kiwi.phonelive.bean.CommunitChlideBeanZhu;
 import com.kiwi.phonelive.http.HttpCallback;
 import com.kiwi.phonelive.http.HttpUtil;
+import com.kiwi.phonelive.utils.DateUtils;
+import com.kiwi.phonelive.utils.TImeUtils;
+import com.kiwi.phonelive.utils.TimeDateUtils;
 import com.kiwi.phonelive.utils.ToastUtil;
 import com.kiwi.phonelive.views.AntGrideVIew;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.tencent.rtmp.ui.TXCloudVideoView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import cn.jzvd.JZVideoPlayerStandard;
@@ -89,7 +94,7 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
             title.setText("图片详情");
             view_img = viewHader.findViewById(R.id.grid_icon);
             myGridViw = viewHader.findViewById(R.id.gv_DynamicPics);
-        } else if (status.equals("text")){
+        } else if (status.equals("text")) {
             viewHader = LayoutInflater.from(getBaseContext()).inflate(R.layout.view_videotextdetlie, null);
         }
         haderImage = viewHader.findViewById(R.id.avatar);
@@ -104,8 +109,9 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
 
     public void initData() {
         postHader();
-//        post_comment();
+        post_comment();
     }
+
     /**
      * 获取头部信息
      */
@@ -140,6 +146,7 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
 
 
                 }
+                addTime.setText(TimeDateUtils.getShortTime(bean.getAddtime()));
                 Glide.with(getBaseContext()).load(bean.getAvatar_thumb()).into(haderImage);
                 name.setText(bean.getUser_nicename());
                 number.setText(bean.getVisit_num() + "次浏览");
@@ -164,6 +171,7 @@ public class Act_VideoImgDetlie extends AbsActivity implements View.OnClickListe
      */
     List<VideoImageDetalieBean> datas = new ArrayList<>();
     private VideoImgDetlieAdapter adapter;
+
     public void post_comment() {
         datas.clear();
         HttpUtil.post_comment(post_id, new HttpCallback() {
